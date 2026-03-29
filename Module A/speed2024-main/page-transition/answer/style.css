@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #eee;
+    background-size: 30px 30px;
+    background-image: repeating-linear-gradient(var(--background-deg), var(--point-color) 0, var(--point-color) 1px, #eee 0, #eee 50%);
+}
+
+body.page1 {
+    --point-color: #444cf7;
+    --background-deg: 45deg;
+}
+
+body.page2 {
+    --point-color: #f74444;
+    --background-deg: -45deg;
+}
+
+.content {
+    text-align: center;
+    background: #fff;
+    border-radius: 2rem;
+    padding: 3rem;
+    border: 10px solid #333;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+p {
+    margin: 2rem 0;
+}
+
+/** view transition animation **/
+/* common */
+::view-transition {
+    perspective: 1000px;
+    background: #444;
+}
+
+::view-transition-group(root),
+::view-transition-image-pair(root),
+::view-transition-group(content-box),
+::view-transition-image-pair(content-box) {
+    transform-style: preserve-3d;
+    isolation: auto;
+}
+
+/* background zoom */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 1s;
+    animation-name: zoom-out;
+}
+
+::view-transition-new(root) {
+    animation-direction: reverse;
+    animation-delay: .8s;
+}
+
+@keyframes zoom-out {
+    0% {
+        transform: translateZ(0);
+    }
+    80% {
+        transform: translateZ(-600px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateZ(-600px);
+        opacity: 0;
+    }
+}
+
+/* content flip */
+.content {
+    view-transition-name: content-box;
+}
+
+::view-transition-new(content-box),
+::view-transition-old(content-box) {
+    backface-visibility: hidden;
+}
+
+::view-transition-old(content-box),
+::view-transition-new(content-box) {
+    animation-duration: 1s;
+}
+
+::view-transition-old(content-box) {
+    animation-name: flip-out;
+}
+
+::view-transition-new(content-box) {
+    transform: rotateY(180deg);
+    animation-name: flip-in;
+}
+
+@keyframes flip-out {
+    0% {
+        transform: rotateY(0);
+    }
+    100% {
+        transform: rotateY(-180deg);
+    }
+}
+
+@keyframes flip-in {
+    0% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
+}

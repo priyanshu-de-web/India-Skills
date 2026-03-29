@@ -1,0 +1,90 @@
+/* Theme C - Bottom to Top Animation with Word-by-Word Caption */
+
+[data-slide-theme="C"] .slide {
+    position: relative;
+}
+
+[data-slide-theme="C"] .slide img {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+[data-slide-theme="C"] .slide-caption {
+    opacity: 1;
+}
+
+[data-slide-theme="C"] .slide-caption .word {
+    display: inline-block;
+    margin-right: 0.25em;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Entering animation - slide from bottom to center */
+[data-slide-theme="C"] .slide.slide-enter {
+    opacity: 1;
+}
+
+[data-slide-theme="C"] .slide.slide-enter img {
+    transform: translateY(100vh);
+    opacity: 0;
+}
+
+[data-slide-theme="C"] .slide.slide-enter .slide-caption .word {
+    transform: translateY(50px);
+    opacity: 0;
+}
+
+[data-slide-theme="C"] .slide.slide-enter-active img {
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform var(--slide-transition-speed) ease-out, 
+                opacity var(--slide-transition-speed) ease-out;
+}
+
+[data-slide-theme="C"] .slide.slide-enter-active .slide-caption .word {
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+}
+
+/* Word animation delays - applied via JS inline styles */
+
+/* Exiting animation - slide from center to top */
+[data-slide-theme="C"] .slide.slide-exit {
+    opacity: 1;
+}
+
+[data-slide-theme="C"] .slide.slide-exit img {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+[data-slide-theme="C"] .slide.slide-exit .slide-caption .word {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+[data-slide-theme="C"] .slide.slide-exit-active img {
+    transform: translateY(-100vh);
+    opacity: 0;
+    transition: transform var(--slide-transition-speed) ease-in, 
+                opacity var(--slide-transition-speed) ease-in;
+}
+
+[data-slide-theme="C"] .slide.slide-exit-active .slide-caption .word {
+    transform: translateY(-50px);
+    opacity: 0;
+    transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+}
+
+/* Idle state */
+[data-slide-theme="C"] .slide.slide-active img {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+[data-slide-theme="C"] .slide.slide-active .slide-caption .word {
+    transform: translateY(0);
+    opacity: 1;
+}

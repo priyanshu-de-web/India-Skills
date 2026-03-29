@@ -1,0 +1,80 @@
+/********************************/
+/* Please write your code here. */
+/********************************/
+
+body {
+    overflow-x: hidden;
+}
+
+#section1 {
+    view-timeline-name: --section1;
+
+    & .box {
+        position: sticky;
+        left: 0;
+        right: 0;
+        top: 100px;
+
+        &::before, &::after {
+            display: block;
+            content: "";
+            background: #fff;
+            width: 50%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            z-index: 2;
+
+            animation: closeAnimation both;
+            animation-timeline: --section1;
+            animation-range: contain 50% cover 100%;
+        }
+
+        &::before {
+            left: 0;
+            transform-origin: left;
+        }
+
+        &::after {
+            right: 0;
+            transform-origin: right;
+        }
+
+        & .text {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+#section2 {
+    height: 300vw;
+    view-timeline-name: --section2;
+
+    & .item {
+        position: sticky;
+        left: 0;
+        top: 0;
+
+        animation: moveAnimation forwards linear;
+        animation-timeline: --section2;
+        animation-range: contain 0 contain 100%;
+    }
+}
+
+@keyframes closeAnimation {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes moveAnimation {
+    to {
+        transform: translateX(calc(-100% + 100vw));
+    }
+}

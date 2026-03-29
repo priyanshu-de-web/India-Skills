@@ -1,0 +1,107 @@
+/* init */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    letter-spacing: 0.025em;
+    line-height: 1.5;
+    background: #ddd;
+}
+
+.container {
+    width: 1440px;
+    margin: 0 auto;
+}
+
+/* header */
+header {
+    background: #fff;
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+header nav ul li:not(:last-child) {
+    margin-right: 1rem;
+}
+
+header a {
+    color: #000;
+    text-decoration: none;
+}
+
+/* main */
+main {
+    flex-grow: 1;
+}
+
+main section {
+    padding: 2rem 0;
+}
+
+/* introduce */
+#introduce {
+    display: flex;
+}
+
+#introduce .introduce-box {
+    width: 50%;
+}
+
+#introduce .tab-button-group {
+    display: flex;
+}
+
+#introduce .tab-button {
+    text-align: center;
+    width: calc(100% / 3);
+    padding: 1rem 0;
+    background: #bbb;
+    cursor: pointer;
+}
+
+#introduce .tab-button.active {
+    background: #222;
+    color: #fff;
+}
+
+#introduce .tab-contents {
+    background: #fff;
+    padding: 1rem;
+}
+
+/* gallery */
+#gallery .gallery-wrapper {
+    display: flex;
+}
+
+#gallery .gallery-wrapper img {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: center;
+    width: 200px;
+    margin-right: 1rem;
+}
+
+/* footer */
+footer {
+    color: #aaa;
+    background: #444;
+    text-align: center;
+    padding: 2rem 0;
+}

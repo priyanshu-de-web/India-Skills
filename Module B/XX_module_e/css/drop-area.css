@@ -1,0 +1,104 @@
+/* Drop Area Styles */
+
+.drop-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-xl);
+}
+
+.drop-area.hidden {
+    display: none;
+}
+
+.drop-area-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl) calc(var(--spacing-xl) * 2);
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    transition: all var(--transition-normal);
+    max-width: 500px;
+    width: 100%;
+}
+
+.drop-area.drag-over .drop-area-content {
+    border-color: var(--accent-color);
+    background-color: rgba(59, 130, 246, 0.05);
+    transform: scale(1.02);
+}
+
+.drop-area-content svg {
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+}
+
+.drop-area.drag-over .drop-area-content svg {
+    color: var(--accent-color);
+}
+
+.drop-area-content h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.drop-area-content p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.drop-area-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+/* Drop indicator overlay */
+.drop-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(59, 130, 246, 0.1);
+    border: 4px dashed var(--accent-color);
+    z-index: 9999;
+    pointer-events: none;
+    display: none;
+}
+
+.drop-indicator.active {
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .drop-area-content {
+        padding: var(--spacing-lg);
+    }
+
+    .drop-area-content h2 {
+        font-size: 1rem;
+    }
+
+    .drop-area-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .drop-area-actions .btn {
+        width: 100%;
+    }
+}

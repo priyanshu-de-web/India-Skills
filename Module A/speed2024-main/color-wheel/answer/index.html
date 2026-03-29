@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        canvas {
+            border-radius: 50%;
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            const $canvas = document.querySelector("canvas");
+            const ctx = $canvas.getContext("2d", {willReadFrequently: true});
+            const $hex = document.querySelector("#hex");
+            const $brightness = document.querySelector("#brightness");
+            let saveX = $canvas.width / 2;
+            let saveY = $canvas.height / 2;
+            const currentRadius = 10;
+
+            const hsv2rgb = (h, s, v) => {
+                let f = (n, k = (n + h / 60) % 6) => v - v * s * Math.max(Math.min(k, 4 - k, 1), 0);
+                return [f(5), f(3), f(1)];
+            }
+
+            const zero = n => (n + "").padStart(2, "0");
+
+            const draw = () => {
+                const size = $canvas.width;
+                const half = size / 2;
+                const brightness = $brightness.value;
+                console.log(brightness);
+                // grab the current ImageData (or use createImageData)
+                ctx.clearRect(0, 0, size, size);
+                const bitmap = ctx.getImageData(0, 0, size, size);
+
+                for (let y = 0; y < size; y++) {
+                    for (let x = 0; x < size; x++) {
+                        // offset for the 4 RGBA values in the data array
+                        const offset = 4 * ((y * size) + x);
+
+                        const hue = 180 + Math.atan2(y - half, x - half) * (180 / Math.PI);
+                        const saturation = Math.min(
+                            1,
+                            Math.sqrt(
+                                Math.pow(y - half, 2) + Math.pow(x - half, 2)
+                            ) / half
+                        );
+
+                        const rgb = hsv2rgb(hue, saturation, brightness);
+
+                        // fill RGBA values
+
+                        bitmap.data[offset] = rgb[0];
+                        bitmap.data[offset + 1] = rgb[1];
+                        bitmap.data[offset + 2] = rgb[2];
+                        bitmap.data[offset + 3] = 255; // no transparency
+                    }
+                }
+
+                // update the canvas
+                ctx.putImageData(bitmap, 0, 0);
+
+                display();
+            }
+
+            const display = () => {
+                ctx.beginPath();
+
+                const colorData = ctx.getImageData(saveX, saveY, 1, 1).data;
+                const rgb = `#${zero(colorData[0].toString(16))}${zero(colorData[1].toString(16))}${zero(colorData[2].toString(16))}`;
+
+                ctx.arc(saveX, saveY, currentRadius, 0, 2 * Math.PI);
+                ctx.strokeStyle = "#000";
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                ctx.fillStyle = rgb;
+                ctx.fill();
+
+                $hex.innerText = rgb;
+            }
+
+            draw();
+
+            $canvas.addEventListener("click", e => {
+                saveX = e.offsetX;
+                saveY = e.offsetY;
+
+                draw();
+            })
+            $brightness.addEventListener("change", e => {
+                draw();
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+
+    <input type="range" id="brightness" min="0" max="255">
+    <canvas width="400" height="400"></canvas>
+    <div id="hex"></div>
+
+</div>
+</body>
+</html>

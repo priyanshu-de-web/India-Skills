@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            width: 500px;
+            height: 500px;
+            position: relative;
+            timeline-scope: --carousel;
+
+        }
+
+        .wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            flex-direction: row;
+
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+
+            scroll-timeline: --carousel x;
+        }
+
+        .wrapper .item {
+            flex: 100% 1 0;
+            scroll-snap-align: center;
+        }
+
+        .wrapper .item .inner {
+            display: flex;
+            height: 100%;
+        }
+
+        .wrapper .item .inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .controller {
+            display: flex;
+            justify-content: center;
+
+            position: absolute;
+            left: 50%;
+            bottom: 2rem;
+            transform: translateX(-50%);
+        }
+
+        .controller a {
+            width: 20px;
+            height: 20px;
+            margin: 0 2px;
+            border-radius: 50%;
+            border: 2px solid #000;
+
+            animation: slideControl linear;
+            animation-timeline: --carousel;
+            animation-range: calc((var(--i) - 1) * (100% / 3)) calc(var(--i) * (100% / 3) + 1px);
+        }
+
+        .controller a:nth-child(1) {
+            --i: 1;
+        }
+
+        .controller a:nth-child(2) {
+            --i: 2;
+        }
+
+        .controller a:nth-child(3) {
+            --i: 3;
+        }
+
+        @keyframes slideControl {
+            from, to {
+                background: #000;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="box">
+
+    <div class="wrapper">
+        <div class="item">
+            <div id="item1" class="inner">
+                <img src="./images/1.jpg" alt="1 image">
+            </div>
+        </div>
+        <div class="item">
+            <div id="item2" class="inner">
+                <img src="./images/2.jpg" alt="2 image">
+            </div>
+        </div>
+        <div class="item">
+            <div id="item3" class="inner">
+                <img src="./images/3.jpg" alt="3 image">
+            </div>
+        </div>
+    </div>
+
+    <div class="controller">
+        <a href="#item1"></a>
+        <a href="#item2"></a>
+        <a href="#item3"></a>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Accessible Website</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>Welcome to Our Accessible Website</h1>
+
+        <nav>
+            <ul>
+                <li><a href="#introduce">Introduce</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <section id="introduce">
+        <div class="introduce-box">
+            <h2>Introduce</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam aut consequatur dignissimos distinctio
+                doloremque dolorum est ex ipsum laboriosam libero magnam nam neque quae quaerat, quidem sed sequi
+                tempora
+                voluptate adipisci aliquid dignissimos eligendi eum explicabo ipsum magni modi sequi tempora velit,
+                vitae! Consequatur id labore obcaecati sunt vel veniam vitae.</p>
+        </div>
+        <div class="introduce-box">
+            <div class="tab-box">
+                <div class="tab-button-group">
+                    <div class="tab-button-1 tab-button active" onclick="clickTabMenu(1)">Tab 1</div>
+                    <div class="tab-button-2 tab-button" onclick="clickTabMenu(2)">Tab 2</div>
+                    <div class="tab-button-3 tab-button" onclick="clickTabMenu(3)">Tab 3</div>
+                </div>
+
+                <div class="tab-contents">
+                    <h3>Tab 1 Title</h3>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquam ducimus hic officiis placeat tempore voluptates. Autem commodi culpa dolore fugiat illo impedit inventore ipsam nihil, quasi reprehenderit sequi vero.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <p>This is the second section of our accessible website.</p>
+
+        <div class="gallery-wrapper">
+            <img src="./images/664-500x500.jpg" alt="">
+            <img src="./images/931-500x500.jpg" alt="">
+            <img src="./images/road-g74ff19e1b_1920.jpg" alt="">
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form action="#" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required aria-required="true">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required aria-required="true">
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2023 Accessible Website. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+
+    const clickTabMenu = number => {
+        const $contents = document.querySelector(".tab-contents");
+        document.querySelector(".tab-button.active").classList.remove("active");
+        document.querySelector(`.tab-button-${number}`).classList.add("active");
+
+
+        const tabHtml = {
+            1: `
+            <h3>Tab 1 Title</h3>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquam ducimus hic officiis placeat tempore voluptates. Autem commodi culpa dolore fugiat illo impedit inventore ipsam nihil, quasi reprehenderit sequi vero.
+            `,
+            2: `
+            <h3>Tab 2 Title</h3>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet animi architecto assumenda dolorem dolorum eos exercitationem maiores, minima nemo nesciunt officia officiis reprehenderit sit temporibus veniam voluptatibus! Esse, non?
+            `,
+            3: `
+            <h3>Tab 3 Title</h3>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad dolorem error magni modi placeat quod repellendus vero voluptates! A, consectetur doloremque eos eum magnam reprehenderit tempora! Eligendi iusto molestias mollitia?
+            `
+        }
+
+        $contents.innerHTML = tabHtml[number];
+    }
+
+</script>
+</body>
+</html>

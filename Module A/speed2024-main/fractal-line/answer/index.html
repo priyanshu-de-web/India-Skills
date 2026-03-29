@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fractal - line</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #ddd;
+        }
+
+        canvas {
+            margin-right: 3rem;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="canvas" width="1000" height="1000"></canvas>
+
+<form onsubmit="enterNumber(event)">
+    <input type="number" id="limitNumber">
+    <button>Draw</button>
+</form>
+
+</body>
+</html>
+
+<script>
+    const ctx = document.getElementById("canvas").getContext("2d");
+    const f = Math.sqrt(2);
+    let max_number;
+
+    function hor(x, y, len, count) {
+        if (count++ >= max_number) return;
+
+        ctx.beginPath();
+        ctx.moveTo(x - len / 2, y);
+        ctx.lineTo(x + len / 2, y);
+        ctx.stroke();
+
+        ver(x - len / 2, y, len / f, count);
+        ver(x + len / 2, y, len / f, count);
+    }
+
+    function ver(x, y, len, count) {
+        if (count++ >= max_number) return;
+
+        ctx.beginPath();
+        ctx.moveTo(x, y - len / 2);
+        ctx.lineTo(x, y + len / 2);
+        ctx.stroke();
+
+        hor(x, y - len / 2, len / f, count);
+        hor(x, y + len / 2, len / f, count);
+    }
+
+    function enterNumber(event) {
+        event.preventDefault();
+        max_number = document.querySelector("#limitNumber").value;
+
+        ctx.clearRect(0, 0, 1000, 1000);
+        hor(500, 500, 1000, 0);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #ddd;
+        }
+
+        .flag {
+            display: flex;
+            position: relative;
+            margin-bottom: 200px;
+            transform: rotate(-20deg);
+        }
+
+        .flag .item {
+            width: 255px;
+            height: 170px;
+        }
+
+        .flag:before {
+            content: "";
+            position: absolute;
+            right: 100%;
+            top: 0;
+            width: 4px;
+            height: 300px;
+            background: #111;
+        }
+    </style>
+</head>
+<body>
+
+<div class="flag">
+    <img src="./flag.png" class="item" alt="france flag" title="france flag">
+</div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+/* You can't edit this code */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #eee;
+    background-size: 30px 30px;
+    background-image: repeating-linear-gradient(var(--background-deg), var(--point-color) 0, var(--point-color) 1px, #eee 0, #eee 50%);
+}
+
+body.page1 {
+    --point-color: #444cf7;
+    --background-deg: 45deg;
+}
+
+body.page2 {
+    --point-color: #f74444;
+    --background-deg: -45deg;
+}
+
+.content {
+    text-align: center;
+    background: #fff;
+    border-radius: 2rem;
+    padding: 3rem;
+    border: 10px solid #333;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+p {
+    margin: 2rem 0;
+}
+
+/* You can write code here */

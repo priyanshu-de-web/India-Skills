@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Chart - line</title>
+    <style>
+        /* 그래프 값 선언 */
+        :root {
+            --line1: calc(100% - 65%);
+            --line2: calc(100% - 25%);
+            --line3: calc(100% - 85%);
+            --line4: calc(100% - 40%);
+            --line-weight: 2px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #container {
+            padding: 3rem;
+            border: 1px solid #555;
+        }
+
+        #chart {
+            position: relative;
+            width: 400px;
+            height: 300px;
+        }
+
+        #chart > * {
+            background: #000;
+            position: absolute;
+            transition: 1s;
+        }
+
+        #chart .connect {
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: -1;
+            clip-path: polygon(
+                    calc(100% / 3 * 0) calc(100% - var(--line-weight)),
+                    calc(100% / 3 * 1) calc(100% - var(--line-weight)),
+                    calc(100% / 3 * 2) calc(100% - var(--line-weight)),
+                    calc(100% / 3 * 3) calc(100% - var(--line-weight)),
+                    calc(100% / 3 * 3) 100%,
+                    calc(100% / 3 * 2) 100%,
+                    calc(100% / 3 * 1) 100%,
+                    calc(100% / 3 * 0) 100%
+            );
+        }
+
+        #chart .dot {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            transform: translate(-50%, -50%);
+            top: calc(100% - 1px);
+        }
+
+        #chart .dot:nth-child(1) {
+            left: calc(100% / 3 * 0);
+        }
+
+        #chart .dot:nth-child(2) {
+            left: calc(100% / 3 * 1);
+        }
+
+        #chart .dot:nth-child(3) {
+            left: calc(100% / 3 * 2);
+        }
+
+        #chart .dot:nth-child(4) {
+            left: calc(100% / 3 * 3);
+        }
+
+        #container:hover .connect {
+            clip-path: polygon(
+                    calc(100% / 3 * 0) calc(var(--line1) - var(--line-weight) / 2),
+                    calc(100% / 3 * 1) calc(var(--line2) - var(--line-weight) / 2),
+                    calc(100% / 3 * 2) calc(var(--line3) - var(--line-weight) / 2),
+                    calc(100% / 3 * 3) calc(var(--line4) - var(--line-weight) / 2),
+                    calc(100% / 3 * 3) calc(var(--line4) + var(--line-weight) / 2),
+                    calc(100% / 3 * 2) calc(var(--line3) + var(--line-weight) / 2),
+                    calc(100% / 3 * 1) calc(var(--line2) + var(--line-weight) / 2),
+                    calc(100% / 3 * 0) calc(var(--line1) + var(--line-weight) / 2)
+            );
+        }
+
+        #container:hover .dot:nth-child(1) {
+            top: var(--line1);
+        }
+
+        #container:hover .dot:nth-child(2) {
+            top: var(--line2);
+        }
+
+        #container:hover .dot:nth-child(3) {
+            top: var(--line3);
+        }
+
+        #container:hover .dot:nth-child(4) {
+            top: var(--line4);
+        }
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="chart">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="connect"></div>
+    </div>
+</div>
+</body>
+</html>

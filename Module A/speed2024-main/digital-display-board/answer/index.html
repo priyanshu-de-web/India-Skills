@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .box {
+            background: #000;
+            margin-top: 1rem;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<label>Type some text: <input value="test"></label>
+<div class="box">
+    <canvas width="1600" height="500"></canvas>
+</div>
+
+<script>
+    const ballRadius = 2;
+    const ballGap = 4;
+    const ballSize = ballRadius * ballGap;
+    const fontSize = 48;
+    const moveSpeed = 4;
+    let balls = [];
+
+    const $canvas = document.querySelector("canvas");
+    const ctx = $canvas.getContext("2d");
+    const canvasWidth = $canvas.width;
+    const canvasHeight = $canvas.height;
+    ctx.font = fontSize + "px Arial";
+
+    const $input = document.querySelector("input");
+    let text = "";
+    let textWidth = 0;
+    let moveX = 0;
+    setTextInfo();
+
+    $input.onchange = setTextInfo;
+
+    function setTextInfo() {
+        moveX = canvasWidth;
+        text = $input.value;
+        textWidth = ctx.measureText(text).width * ballSize;
+    }
+
+    function generate() {
+        balls = [];
+
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.fillText(text, 0, fontSize);
+
+        const data32 = new Uint32Array(ctx.getImageData(0, 0, canvasWidth, canvasHeight).data.buffer);
+
+        for(let i = 0; i < data32.length; i++) {
+            if (data32[i] & 0xff000000) {
+                balls.push({
+                    x: (i % canvasWidth) * ballSize + ballRadius,
+                    y: ((i / canvasWidth)|0) * ballSize + ballRadius,
+                });
+            }
+        }
+    }
+
+    function animate() {
+        generate();
+
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.beginPath();
+
+        ctx.fillStyle = "rgb(85,189,255)"
+        for(let i = 0; i < balls.length; i++) {
+            const ball = balls[i];
+
+            const x = Math.floor((ball.x + moveX) / ballGap) * ballGap;
+            const y = Math.floor(ball.y / ballGap) * ballGap;
+
+            ctx.moveTo(x + ballRadius, y);
+            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+        }
+        ctx.fill();
+        if(moveX < -textWidth) {
+            setTextInfo();
+        }
+        moveX -= moveSpeed;
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
+
+</body>
+</html>

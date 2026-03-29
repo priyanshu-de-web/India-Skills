@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pixel art</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            letter-spacing: -0.025em;
+            line-height: 1.5;
+            background: #777;
+            height: 100vh;
+        }
+
+        #canvas {
+            display: grid;
+            grid-template-columns: repeat(20, 1fr);
+            grid-template-rows: repeat(20, 1fr);
+            width: calc(20 * 30px);
+            height: calc(20 * 30px);
+            gap: 1px;
+            margin-bottom: 3rem;
+        }
+
+        .pixel {
+            background: #fff;
+        }
+
+        #tool-box {
+            display: flex;
+            justify-content: center;
+        }
+
+        #tool-box button.select {
+            background: #000;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="canvas">
+    <div class="pixel"></div>
+</div>
+
+<div id="tool-box">
+    <input type="color" id="color-input">
+
+    <button class="select" data-type="draw" onclick="selectTool(this)">
+        Draw
+    </button>
+    <button data-type="eraser" onclick="selectTool(this)">
+        Eraser
+    </button>
+    <button onclick="clickCopy()">
+        Copy
+    </button>
+
+    <div class="pixel-to-css"></div>
+</div>
+
+<script>
+    const $color = document.querySelector("#color-input");
+    const $canvas = document.querySelector("#canvas");
+    let html = "";
+    for (let y = 1; y <= 20; y++) {
+        for (let x = 1; x <= 20; x++) {
+            html += `<div class="pixel" data-x="${x}" data-y="${y}"></div>`
+        }
+    }
+    $canvas.innerHTML = html;
+    const $pixels = document.querySelectorAll(".pixel");
+
+    $pixels.forEach($e => $e.addEventListener("click", clickPixel))
+
+    function clickPixel(e) {
+        const type = document.querySelector("button.select").dataset.type;
+        const color = $color.value;
+
+        if (type === "draw") {
+            this.dataset.background = color;
+            this.style.backgroundColor = color;
+        } else {
+            this.removeAttribute("data-background")
+            this.removeAttribute("style")
+        }
+    }
+
+    function selectTool($button) {
+        document.querySelector("button.select").classList.remove("select");
+        $button.classList.add("select");
+    }
+
+    function clickCopy() {
+        const value = [...$pixels].map($pixel => {
+            const background = $pixel.dataset.background;
+            if (!background) {
+                return false;
+            }
+
+            const x = $pixel.dataset.x;
+            const y = $pixel.dataset.y;
+
+            return `${x * 10}px ${y * 10}px 0 0 ${background}`;
+        }).filter(a => a).join(", ");
+
+        const css = `.pixel-to-css {
+            box-shadow: ${value};
+            width: 10px;
+            height: 10px;
+        }`;
+
+        copyToClipboard(css);
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                console.log("Copy successful")
+            })
+            .catch(() => {
+                console.log("Copy fail")
+            })
+    }
+
+    /** test code **/
+    cssToCanvas("90px 40px 0 0 #000000, 100px 40px 0 0 #000000, 110px 40px 0 0 #000000, 120px 40px 0 0 #000000, 130px 40px 0 0 #000000, 140px 40px 0 0 #000000, 80px 50px 0 0 #000000, 130px 50px 0 0 #000000, 70px 60px 0 0 #000000, 130px 60px 0 0 #000000, 70px 70px 0 0 #000000, 90px 70px 0 0 #000000, 110px 70px 0 0 #000000, 140px 70px 0 0 #000000, 70px 80px 0 0 #000000, 140px 80px 0 0 #000000, 40px 90px 0 0 #000000, 50px 90px 0 0 #000000, 60px 90px 0 0 #000000, 90px 90px 0 0 #000000, 100px 90px 0 0 #000000, 110px 90px 0 0 #000000, 150px 90px 0 0 #000000, 160px 90px 0 0 #000000, 170px 90px 0 0 #000000, 40px 100px 0 0 #000000, 170px 100px 0 0 #000000, 50px 110px 0 0 #000000, 160px 110px 0 0 #000000, 60px 120px 0 0 #000000, 150px 120px 0 0 #000000, 60px 130px 0 0 #000000, 140px 130px 0 0 #000000, 60px 140px 0 0 #000000, 140px 140px 0 0 #000000, 70px 150px 0 0 #000000, 140px 150px 0 0 #000000, 80px 160px 0 0 #000000, 130px 160px 0 0 #000000, 90px 170px 0 0 #000000, 100px 170px 0 0 #000000, 130px 170px 0 0 #000000, 110px 180px 0 0 #000000, 120px 180px 0 0 #000000, 130px 180px 0 0 #000000, 140px 180px 0 0 #000000");
+    function cssToCanvas(boxShadow) {
+        const array = boxShadow.split(", ");
+        array.forEach(item => {
+            const data = item.split(" 0 0 ");
+            const [x, y] = data[0].split(" ");
+            const background = data[1];
+
+            const pixel = document.querySelector(`.pixel[data-x="${parseInt(x) / 10}"][data-y="${parseInt(y) / 10}"]`);
+            pixel.dataset.background = background;
+            pixel.style.backgroundColor = background;
+        })
+    }
+</script>
+
+</body>
+</html>

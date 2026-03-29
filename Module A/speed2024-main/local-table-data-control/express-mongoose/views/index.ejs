@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Local Table Data Control - Express + Mongoose</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+            margin: 2px;
+        }
+
+        button[value="add"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        button[value="save"] {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<form action="/update" method="post">
+    <table border="1">
+        <thead>
+        <tr>
+            <% fields.forEach(function(field) { %>
+                <td>
+                    <input type="text" name="fields[]" value="<%= field %>">
+                </td>
+            <% }); %>
+            <td>== action ==</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% rows.forEach(function(row, rowIndex) { %>
+            <tr>
+                <% row.forEach(function(item) { %>
+                    <td>
+                        <input type="text" name="rows[<%= rowIndex %>][]" value="<%= item %>">
+                    </td>
+                <% }); %>
+                <td>
+                    <button class="delete-btn" name="type" value="<%= rowIndex %>">Delete</button>
+                </td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+    <button name="type" value="add">Add row</button>
+    <button name="type" value="save">Save</button>
+</form>
+</body>
+</html>

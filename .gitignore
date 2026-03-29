@@ -1,0 +1,15 @@
+# Nested git repos (keep their contents, ignore their .git dirs)
+Module A/.git
+Module B/.git
+Module C/.git
+Module D/.git
+
+# Claude Code
+.claude/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Node
+node_modules/

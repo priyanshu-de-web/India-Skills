@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Upload Progressbar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #container {
+            width: 400px;
+        }
+
+        #container form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        #container .progressbar-box {
+            width: 100%;
+            height: 20px;
+            background: rgba(0,0,0,.05);
+        }
+
+        #container .progressbar-item {
+            height: 100%;
+            background: #4fd6ff;
+            transition: .3s;
+            width: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <form action="" onsubmit="submitFile(event)">
+        <input type="file" id="fileInput">
+        <button>Upload</button>
+    </form>
+
+    <div class="progressbar-box">
+        <div class="progressbar-item"></div>
+    </div>
+</div>
+
+<script>
+    const $fileInput = document.querySelector("#fileInput");
+    const $progressItem = document.querySelector(".progressbar-item");
+    const submitFile = e => {
+        e.preventDefault();
+        progressbarSetWidth(0);
+
+        const file = $fileInput.files[0];
+        if(!file) {
+            alert("Select file");
+            return
+        }
+
+        const body = new FormData();
+        body.append("file", file);
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.upload.addEventListener("progress", progress)
+
+        xhr.open("post", "./upload.php");
+        xhr.send(body);
+    }
+
+    const progress = e => {
+        progressbarSetWidth(e.loaded / e.total * 100 + "%")
+    }
+
+    const progressbarSetWidth = width => {
+        $progressItem.style.width = width;
+    }
+</script>
+
+</body>
+</html>

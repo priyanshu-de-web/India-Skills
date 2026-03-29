@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.global.js"></script>
+    <link rel="stylesheet" href="./bootstrap.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        canvas {
+            border: 1px solid #ccc;
+        }
+
+        .layer_list {
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app" class="d-flex align-items-center">
+    <div class="me-5">
+        <canvas ref="mainCanvas" width="800" height="600"></canvas>
+        <div class="row justify-content-center">
+            <div class="col-2">
+                <input type="color" class="form-control" v-model="color">
+            </div>
+            <div class="col-2">
+                <select class="form-select" v-model="select_id">
+                    <option :value="layer.id" v-for="layer in ordered_layers">{{layer.id}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 layer_list">
+
+        <div class="col-12 d-flex justify-content-center" v-for="layer in ordered_layers">
+            <canvas width="200" height="150" :ref="'layerCanvas' + layer.id"></canvas>
+            <div class="ms-4">
+                <div>
+                    <p>{{layer.id}}</p>
+                    <label>
+                        layer order
+                        <input type="number" v-model="layer.order" class="form-control">
+                    </label>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-outline-danger" @click="deleteLayer(layer)">Delete</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ms-5">
+        <button class="btn btn-primary" @click="addLayer">Add layer</button>
+    </div>
+</div>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                layers: [
+                    // {
+                    //     id: int,
+                    //     canvas: canvas element,
+                    //     order: int,
+                    // }
+                ],
+                color: "#000000",
+                select_id: null,
+            }
+        },
+        computed: {
+            select_layer() {
+                return this.layers.find(layer => layer.id === this.select_id);
+            },
+            ordered_layers() {
+                return this.layers.sort((a, b) => {
+                    return a.order - b.order;
+                })
+            }
+        },
+        methods: {
+            addLayer() {
+                const canvas = document.createElement("canvas");
+                canvas.width = this.$refs.mainCanvas.width;
+                canvas.height = this.$refs.mainCanvas.height;
+
+                this.layers.push({
+                    id: parseInt(Math.random() * 10000000000),
+                    canvas,
+                    ctx: canvas.getContext("2d"),
+                    order: 0,
+                })
+            },
+            deleteLayer(layer) {
+                if(this.select_id === layer.id) {
+                    this.select_id = null;
+                }
+
+                this.layers.splice(this.layers.findIndex(l => l.id === layer.id), 1);
+                this.drawAll();
+            },
+            drawDown(e) {
+                if(!this.select_layer) {
+                    alert("Select a layer")
+                    return;
+                }
+                this.select_layer.ctx.beginPath();
+                this.select_layer.ctx.moveTo(e.offsetX, e.offsetY);
+
+                this.$refs.mainCanvas.addEventListener("mousemove", this.drawMove);
+                this.$refs.mainCanvas.addEventListener("mouseup", this.drawUp);
+            },
+            drawMove(e) {
+                this.select_layer.ctx.strokeStyle = this.color;
+                this.select_layer.ctx.lineWidth = 3;
+
+                this.select_layer.ctx.lineTo(e.offsetX, e.offsetY);
+                this.select_layer.ctx.stroke();
+                this.drawAll();
+            },
+            drawUp() {
+                this.$refs.mainCanvas.removeEventListener("mousemove", this.drawMove);
+                this.$refs.mainCanvas.removeEventListener("mouseup", this.drawUp);
+            },
+            drawAll() {
+                const mainCtx = this.$refs.mainCanvas.getContext("2d");
+                mainCtx.clearRect(0, 0, this.$refs.mainCanvas.width, this.$refs.mainCanvas.height);
+
+                for (const layer of this.ordered_layers) {
+                    mainCtx.drawImage(layer.canvas, 0, 0);
+
+                    const layerCanvas = this.$refs["layerCanvas" + layer.id][0];
+                    const layerCtx = layerCanvas.getContext("2d");
+                    layerCtx.clearRect(0, 0, layerCanvas.width, layerCanvas.height);
+                    layerCtx.drawImage(layer.canvas, 0, 0, layerCanvas.width, layerCanvas.height);
+                }
+            }
+        },
+        mounted() {
+            this.$refs.mainCanvas.addEventListener("mousedown", this.drawDown);
+        },
+        watch: {
+            layers: {
+                deep: true,
+                handler() {
+                    this.$nextTick(this.drawAll);
+                },
+            }
+        }
+    });
+
+    app.mount("#app");
+
+</script>
+
+</body>
+</html>

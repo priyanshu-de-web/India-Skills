@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WSC2024 - Module A Speed Test Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #aaa;
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e94560;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #e0e0e0;
+            transition: all 0.2s ease;
+            display: block;
+        }
+
+        .project-card:hover {
+            border-color: #e94560;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .project-card.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .project-id {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #e94560;
+        }
+
+        .project-level {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .level-1 { background: #d4edda; color: #155724; }
+        .level-2 { background: #fff3cd; color: #856404; }
+        .level-3 { background: #f8d7da; color: #721c24; }
+
+        .project-title {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .project-type {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .express-badge {
+            display: inline-block;
+            background: #34d399;
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-left: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.85rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.5rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>WorldSkills Lyon 2024</h1>
+        <p>Module A - Mini Speed Test Projects</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Design Implementation -->
+        <section class="section">
+            <h2 class="section-title">Design Implementation (A1-A27)</h2>
+            <div class="projects-grid">
+                <a href="./loading-animation/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">A6</span>
+                        <span class="project-level level-1">Level 1</span>
+                    </div>
+                    <div class="project-title">Loading Animation</div>
+                    <div class="project-type">CSS Animation</div>
+                </a>
+
+                <a href="./carousel-key-control/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">A18</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">Carousel Key Control</div>
+                    <div class="project-type">CSS Only</div>
+                </a>
+
+                <a href="./flag-animation/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">A19</span>
+                        <span class="project-level level-3">Level 3</span>
+                    </div>
+                    <div class="project-title">Flag Animation</div>
+                    <div class="project-type">CSS Animation</div>
+                </a>
+
+                <a href="./css-chart-line/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">A20</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">CSS Line Chart</div>
+                    <div class="project-type">CSS Only</div>
+                </a>
+
+                <a href="./css-chart-bar/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">A22</span>
+                        <span class="project-level level-1">Level 1</span>
+                    </div>
+                    <div class="project-title">CSS Bar Chart</div>
+                    <div class="project-type">CSS Only</div>
+                </a>
+
+                <a href="./scroll-animation/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">A23</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">Scroll Animation</div>
+                    <div class="project-type">CSS Animation</div>
+                </a>
+
+                <a href="./css-chart-pie/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">A25</span>
+                        <span class="project-level level-1">Level 1</span>
+                    </div>
+                    <div class="project-title">CSS Pie Chart</div>
+                    <div class="project-type">CSS Only</div>
+                </a>
+
+                <a href="./dashboard-layout/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">A26</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">Dashboard Layout</div>
+                    <div class="project-type">CSS Layout</div>
+                </a>
+
+                <a href="./accessibility/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">A27</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">Accessibility</div>
+                    <div class="project-type">HTML/CSS</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Front-end Development -->
+        <section class="section">
+            <h2 class="section-title">Front-end Development (B1-B41)</h2>
+            <div class="projects-grid">
+                <a href="./layer-paint-board/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B21</span>
+                        <span class="project-level level-3">Level 3</span>
+                    </div>
+                    <div class="project-title">Layer Paint Board</div>
+                    <div class="project-type">Canvas / Vue.js</div>
+                </a>
+
+                <a href="./excel-table/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B22</span>
+                        <span class="project-level level-1">Level 1</span>
+                    </div>
+                    <div class="project-title">Excel Table</div>
+                    <div class="project-type">JavaScript</div>
+                </a>
+
+                <a href="./3d-wave-words/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B23</span>
+                        <span class="project-level level-1">Level 1</span>
+                    </div>
+                    <div class="project-title">3D Wave Words</div>
+                    <div class="project-type">CSS 3D Transform</div>
+                </a>
+
+                <a href="./page-transition/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B25</span>
+                        <span class="project-level level-3">Level 3</span>
+                    </div>
+                    <div class="project-title">Page Transition</div>
+                    <div class="project-type">SPA / JavaScript</div>
+                </a>
+
+                <a href="./digital-display-board/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B26</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">Digital Display Board</div>
+                    <div class="project-type">Canvas</div>
+                </a>
+
+                <a href="./color-wheel/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B28</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">Color Wheel</div>
+                    <div class="project-type">Canvas</div>
+                </a>
+
+                <a href="./firefly/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B29</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">Firefly</div>
+                    <div class="project-type">Three.js / WebGL</div>
+                </a>
+
+                <a href="./upload-progressbar/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B30</span>
+                        <span class="project-level level-1">Level 1</span>
+                    </div>
+                    <div class="project-title">Upload Progressbar</div>
+                    <div class="project-type">XHR / JavaScript</div>
+                </a>
+
+                <a href="./fractal-line/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B31</span>
+                        <span class="project-level level-1">Level 1</span>
+                    </div>
+                    <div class="project-title">Fractal Line</div>
+                    <div class="project-type">Canvas</div>
+                </a>
+
+                <a href="./pointer-tail/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B32</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">Pointer Tail</div>
+                    <div class="project-type">Canvas</div>
+                </a>
+
+                <a href="./shared-animation-video/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B33</span>
+                        <span class="project-level level-3">Level 3</span>
+                    </div>
+                    <div class="project-title">Shared Animation Video</div>
+                    <div class="project-type">SPA / Video</div>
+                </a>
+
+                <a href="./asynchronous-calculation/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B34</span>
+                        <span class="project-level level-1">Level 1</span>
+                    </div>
+                    <div class="project-title">Async Calculation</div>
+                    <div class="project-type">Web Worker</div>
+                </a>
+
+                <a href="./fractal-triangle/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B35</span>
+                        <span class="project-level level-1">Level 1</span>
+                    </div>
+                    <div class="project-title">Fractal Triangle</div>
+                    <div class="project-type">Canvas</div>
+                </a>
+
+                <a href="./pixel-art/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B37</span>
+                        <span class="project-level level-3">Level 3</span>
+                    </div>
+                    <div class="project-title">Pixel Art</div>
+                    <div class="project-type">Canvas</div>
+                </a>
+
+                <a href="./masonry-layout/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B38</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">Masonry Layout</div>
+                    <div class="project-type">JavaScript</div>
+                </a>
+
+                <a href="./radar-chart/answer/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">Extra</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">Radar Chart</div>
+                    <div class="project-type">Chart.js</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Back-end Development -->
+        <section class="section">
+            <h2 class="section-title">Back-end Development (C1-C13)</h2>
+            <div class="projects-grid">
+                <a href="./api-cors/answer/front-end/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">C9</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">API CORS</div>
+                    <div class="project-type">PHP Backend</div>
+                </a>
+
+                <a href="./realtime_chat/answer/front-end/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">C10</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">Realtime Chat</div>
+                    <div class="project-type">Socket.io / Node.js</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Express + Mongoose Conversions -->
+        <section class="section">
+            <h2 class="section-title">Express + Mongoose Conversions</h2>
+            <p style="color: #666; margin-bottom: 20px; font-size: 0.9rem;">
+                PHP/Laravel projects converted to Node.js. Run with: <code style="background: #eee; padding: 2px 6px; border-radius: 3px;">npm install && npm start</code>
+            </p>
+            <div class="projects-grid">
+                <a href="./recurring-calendar/express-mongoose/" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">C5</span>
+                        <span class="project-level level-3">Level 3</span>
+                    </div>
+                    <div class="project-title">Recurring Calendar <span class="express-badge">Express</span></div>
+                    <div class="project-type">MongoDB | Port 3000</div>
+                </a>
+
+                <a href="./excel-download/express-mongoose/" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">C7</span>
+                        <span class="project-level level-3">Level 3</span>
+                    </div>
+                    <div class="project-title">Excel Download <span class="express-badge">Express</span></div>
+                    <div class="project-type">MongoDB | Port 3001</div>
+                </a>
+
+                <a href="./api-cors/express-mongoose/" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">C9</span>
+                        <span class="project-level level-2">Level 2</span>
+                    </div>
+                    <div class="project-title">API CORS <span class="express-badge">Express</span></div>
+                    <div class="project-type">REST API | Port 3002</div>
+                </a>
+
+                <a href="./local-table-data-control/express-mongoose/" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">C12</span>
+                        <span class="project-level level-1">Level 1</span>
+                    </div>
+                    <div class="project-title">Local Table Data <span class="express-badge">Express</span></div>
+                    <div class="project-type">MongoDB | Port 3003</div>
+                </a>
+
+                <a href="./upload-progressbar/express-mongoose/public/index.html" class="project-card">
+                    <div class="project-header">
+                        <span class="project-id">B30</span>
+                        <span class="project-level level-1">Level 1</span>
+                    </div>
+                    <div class="project-title">Upload Progressbar <span class="express-badge">Express</span></div>
+                    <div class="project-type">Multer | Port 3004</div>
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <p>WorldSkills Lyon 2024 | Web Technologies | Module A</p>
+    </footer>
+</body>
+</html>

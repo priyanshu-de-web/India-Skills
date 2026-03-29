@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Asynchronous calculation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .message-box {
+            margin: 3rem 0;
+        }
+    </style>
+</head>
+<body>
+
+<form onsubmit="runCalc(event)">
+    <input type="number" id="numberInput">
+    <button>Calculation</button>
+</form>
+
+<div class="message-box">
+    <p>
+        number: <b id="number"></b>
+    </p>
+    <p>
+        progress: <b id="progress"></b>
+    </p>
+    <p>
+        result: <b id="result"></b>
+    </p>
+</div>
+
+<button onclick="changeRandomBackground()">change background</button>
+
+<script>
+    const $result = document.getElementById("result");
+    const $progress = document.getElementById("progress");
+    const $number = document.getElementById("number");
+
+    let isCalculation = false;
+
+    const myWorker = new Worker("./worker.js");
+    myWorker.addEventListener("message", function(e) {
+        const {type, data} = e.data;
+
+        if(type === "calc") {
+            $progress.innerText = data;
+        } else {
+            $result.innerText = data;
+            isCalculation = false;
+        }
+    })
+
+    function changeRandomBackground() {
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+        document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    }
+
+    function runCalc(e) {
+        e.preventDefault();
+
+        if(isCalculation) {
+            alert("Already calculating")
+            return;
+        }
+
+        $progress.innerText = "0%";
+        isCalculation = true;
+        const number = document.querySelector("#numberInput").value;
+        $number.innerText = number;
+
+        myWorker.postMessage(number);
+    }
+
+</script>
+
+</body>
+</html>

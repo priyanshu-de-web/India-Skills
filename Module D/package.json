@@ -1,0 +1,18 @@
+{
+  "name": "module-d",
+  "version": "1.0.0",
+  "description": "Taiwan Tourism Module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "seed": "node seed.js",
+    "start": "node server.js"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mongoose": "^8.23.0"
+  }
+}

@@ -1,0 +1,165 @@
+/* Theme D - Custom Appealing Animation: 3D Flip with Zoom and Blur */
+
+[data-slide-theme="D"] .slide-wrapper {
+    perspective: 1500px;
+}
+
+[data-slide-theme="D"] .slide {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+[data-slide-theme="D"] .slide img {
+    transform: scale(1) rotateY(0deg);
+    opacity: 1;
+    filter: blur(0);
+    transition: transform var(--slide-transition-speed) ease,
+                opacity var(--slide-transition-speed) ease,
+                filter var(--slide-transition-speed) ease;
+}
+
+[data-slide-theme="D"] .slide-caption {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: blur(0);
+}
+
+[data-slide-theme="D"] .slide-caption .word {
+    display: inline-block;
+    margin-right: 0.25em;
+    transform: translateY(0) rotateX(0deg);
+    opacity: 1;
+}
+
+/* Entering animation - 3D flip from behind with zoom */
+[data-slide-theme="D"] .slide.slide-enter {
+    opacity: 1;
+}
+
+[data-slide-theme="D"] .slide.slide-enter img {
+    transform: scale(0.5) rotateY(-180deg);
+    opacity: 0;
+    filter: blur(10px);
+}
+
+[data-slide-theme="D"] .slide.slide-enter .slide-caption {
+    transform: translateY(30px) scale(0.8);
+    opacity: 0;
+    filter: blur(5px);
+}
+
+[data-slide-theme="D"] .slide.slide-enter .slide-caption .word {
+    transform: translateY(30px) rotateX(-90deg);
+    opacity: 0;
+}
+
+[data-slide-theme="D"] .slide.slide-enter-active img {
+    transform: scale(1) rotateY(0deg);
+    opacity: 1;
+    filter: blur(0);
+    transition: transform var(--slide-transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity var(--slide-transition-speed) ease-out,
+                filter var(--slide-transition-speed) ease-out;
+}
+
+[data-slide-theme="D"] .slide.slide-enter-active .slide-caption {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: blur(0);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s,
+                opacity 0.5s ease-out 0.2s,
+                filter 0.5s ease-out 0.2s;
+}
+
+[data-slide-theme="D"] .slide.slide-enter-active .slide-caption .word {
+    transform: translateY(0) rotateX(0deg);
+    opacity: 1;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.4s ease-out;
+}
+
+/* Exiting animation - 3D flip forward with zoom out */
+[data-slide-theme="D"] .slide.slide-exit {
+    opacity: 1;
+}
+
+[data-slide-theme="D"] .slide.slide-exit img {
+    transform: scale(1) rotateY(0deg);
+    opacity: 1;
+    filter: blur(0);
+}
+
+[data-slide-theme="D"] .slide.slide-exit .slide-caption {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+[data-slide-theme="D"] .slide.slide-exit .slide-caption .word {
+    transform: translateY(0) rotateX(0deg);
+    opacity: 1;
+}
+
+[data-slide-theme="D"] .slide.slide-exit-active img {
+    transform: scale(1.5) rotateY(180deg);
+    opacity: 0;
+    filter: blur(10px);
+    transition: transform var(--slide-transition-speed) cubic-bezier(0.36, 0, 0.66, -0.56),
+                opacity var(--slide-transition-speed) ease-in,
+                filter var(--slide-transition-speed) ease-in;
+}
+
+[data-slide-theme="D"] .slide.slide-exit-active .slide-caption {
+    transform: translateY(-30px) scale(1.2);
+    opacity: 0;
+    filter: blur(5px);
+    transition: transform 0.4s ease-in,
+                opacity 0.4s ease-in,
+                filter 0.4s ease-in;
+}
+
+[data-slide-theme="D"] .slide.slide-exit-active .slide-caption .word {
+    transform: translateY(-30px) rotateX(90deg);
+    opacity: 0;
+    transition: transform 0.3s ease-in,
+                opacity 0.3s ease-in;
+}
+
+/* Idle state with subtle floating animation */
+[data-slide-theme="D"] .slide.slide-active img {
+    transform: scale(1) rotateY(0deg);
+    opacity: 1;
+    filter: blur(0);
+    animation: floatImage 4s ease-in-out infinite;
+}
+
+[data-slide-theme="D"] .slide.slide-active .slide-caption {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: blur(0);
+}
+
+[data-slide-theme="D"] .slide.slide-active .slide-caption .word {
+    transform: translateY(0) rotateX(0deg);
+    opacity: 1;
+}
+
+/* Floating animation for active slide */
+@keyframes floatImage {
+    0%, 100% {
+        transform: scale(1) translateY(0);
+    }
+    50% {
+        transform: scale(1.02) translateY(-5px);
+    }
+}
+
+/* Additional visual enhancement - glow effect */
+[data-slide-theme="D"] .slide.slide-active img {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(59, 130, 246, 0.1);
+}
+
+[data-theme="dark"][data-slide-theme="D"] .slide.slide-active img {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 60px rgba(59, 130, 246, 0.2);
+}

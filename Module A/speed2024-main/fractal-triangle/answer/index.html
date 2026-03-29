@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fractal - line</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #ddd;
+        }
+
+        canvas {
+            background: #fff;
+            margin-right: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas" width="1000" height="1000"></canvas>
+
+    <form onsubmit="startDraw(event)">
+        <input type="number" id="limitNumber">
+        <button>Draw</button>
+    </form>
+
+</body>
+</html>
+
+<script>
+    const ctx = document.getElementById("canvas").getContext("2d");
+    let max_count = 0;
+
+    const drawTriangle = (x, y, height, count) => {
+        if(count++ >= max_count) return;
+
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x - height / 2, y - height);
+        ctx.lineTo(x + height / 2, y - height);
+        ctx.fill();
+
+        drawTriangle(x - height / 2, y, height / 2, count); // left
+        drawTriangle(x + height / 2, y, height / 2, count); // right
+        drawTriangle(x, y - height, height / 2, count); // top
+    }
+
+    function startDraw(event) {
+        event.preventDefault();
+        max_count = document.querySelector("#limitNumber").value;
+
+        ctx.clearRect(0, 0, 1000, 1000);
+
+        // init
+        ctx.beginPath();
+        ctx.moveTo(500, 0);
+        ctx.lineTo(0, 1000);
+        ctx.lineTo(1000, 1000);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+
+        // start
+        ctx.fillStyle = "#fff";
+        drawTriangle(500, 1000, 500, 0);
+    }
+
+</script>
+</body>
+</html>

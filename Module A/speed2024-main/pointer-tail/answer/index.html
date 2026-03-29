@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pointer tail</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            cursor: none;
+        }
+
+        svg {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #pointer-circle {
+            fill: #d2330f;
+            pointer-events: none;
+        }
+
+        #pointer-tail {
+            fill: none;
+            stroke: #d2330f;
+            stroke-width: 2;
+        }
+    </style>
+</head>
+<body>
+<svg>
+
+    <circle id="pointer-circle" cx="0" cy="0" r="8"></circle>
+
+    <polyline id="pointer-tail" points=""></polyline>
+
+</svg>
+
+<script>
+
+    const $pointerTail = document.querySelector('#pointer-tail');
+    const $pointerCircle = document.querySelector('#pointer-circle');
+
+    const total = 12;
+    let debounce_removeLine;
+    let debounce_counter = 0;
+
+    const pointer = {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+        tx: 0,
+        ty: 0,
+        dist: 0,
+        scale: 1,
+        circRadius: 8,
+        updatePointer: function () {
+            this.dist = Math.sqrt(this.tx * this.tx + this.ty * this.ty);
+            this.scale = Math.max((total - points.length) / total, 0.4); // gt 0.4
+        }
+    };
+
+    const points = [];
+
+    window.addEventListener("mousemove", function (e) {
+        // start mouse event logic
+        pointer.x = e.clientX;
+        pointer.y = e.clientY;
+        pointer.tx = e.movementX;
+        pointer.ty = e.movementY;
+        debounce_counter = 0;
+
+        points.push({
+            x: pointer.x,
+            y: pointer.y
+        });
+        drawLine();
+
+        // debounce
+        clearTimeout(debounce_removeLine);
+        debounce_removeLine = setTimeout(() => {
+            debounce_counter = total * 1.2;
+            drawLine();
+        }, 80);
+    })
+
+    function drawLine() {
+        pointer.updatePointer();
+        console.log(pointer.scale);
+
+        while (points.length > total) {
+            points.shift();
+        }
+
+        // tail
+        const pointsArr = points.map(point => `${point.x},${point.y}`);
+        const polyPoints = pointsArr.join(' ');
+        $pointerTail.setAttribute('points', polyPoints);
+
+        // circle
+        const circleX = pointer.x;
+        const circleY = pointer.y;
+        const circleR = pointer.scale * pointer.circRadius;
+
+        $pointerCircle.setAttribute('cx', circleX);
+        $pointerCircle.setAttribute('cy', circleY);
+        $pointerCircle.setAttribute('r', circleR);
+
+        if (debounce_counter-- > 0) {
+            points.shift();
+            requestAnimationFrame(drawLine);
+        }
+    }
+
+</script>
+</body>
+</html>

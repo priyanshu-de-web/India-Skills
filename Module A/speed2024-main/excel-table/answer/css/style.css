@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, serif;
+    background: rgba(0,0,0,.1);
+}
+
+.box {
+    position: relative;
+    overflow: scroll;
+    background: #fff;
+}
+
+table {
+    border-collapse: collapse;
+    position: sticky;
+    left: 0;
+    top: 0;
+}
+
+table td {
+    border: 1px solid #ddd;
+    padding: 1px;
+    width: 70px;
+    height: 30px;
+}
+
+table td.title {
+    background: #333;
+    color: #fff;
+}
+
+table td input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+}

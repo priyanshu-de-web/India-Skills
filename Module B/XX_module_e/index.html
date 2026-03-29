@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos Slideshow</title>
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/config-panel.css">
+    <link rel="stylesheet" href="css/command-bar.css">
+    <link rel="stylesheet" href="css/drop-area.css">
+    <!-- Theme Styles -->
+    <link rel="stylesheet" href="css/themes/theme-a.css">
+    <link rel="stylesheet" href="css/themes/theme-b.css">
+    <link rel="stylesheet" href="css/themes/theme-c.css">
+    <link rel="stylesheet" href="css/themes/theme-d.css">
+</head>
+<body data-theme="light" data-slide-theme="A">
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>Photos Slideshow</h1>
+            <div class="header-controls">
+                <button id="fullscreen-btn" class="btn btn-icon" title="Toggle Fullscreen">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                    </svg>
+                </button>
+                <button id="config-toggle-btn" class="btn btn-icon" title="Toggle Configuration Panel">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                </button>
+                <span class="keyboard-hint">Press Ctrl+K or "/" for commands</span>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Drop Area (shown when no photos) -->
+            <div id="drop-area" class="drop-area">
+                <div class="drop-area-content">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    <h2>Drag & Drop Photos Here</h2>
+                    <p>or click to select files</p>
+                    <input type="file" id="file-input" multiple accept="image/*" hidden>
+                    <div class="drop-area-actions">
+                        <button id="select-files-btn" class="btn btn-primary">Select Files</button>
+                        <button id="load-samples-btn" class="btn btn-secondary">Load Sample Photos</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slideshow Container -->
+            <div id="slideshow-container" class="slideshow-container hidden">
+                <div class="slide-wrapper">
+                    <div id="slide" class="slide">
+                        <img id="slide-image" src="" alt="">
+                        <div id="slide-caption" class="slide-caption"></div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Arrows (for manual mode) -->
+                <button id="prev-btn" class="nav-btn nav-prev" title="Previous (Left Arrow)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                </button>
+                <button id="next-btn" class="nav-btn nav-next" title="Next (Right Arrow)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+
+                <!-- Playback Controls -->
+                <div class="playback-controls">
+                    <button id="play-btn" class="btn btn-icon" title="Play">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                    </button>
+                    <button id="pause-btn" class="btn btn-icon hidden" title="Pause">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <rect x="6" y="4" width="4" height="16"/>
+                            <rect x="14" y="4" width="4" height="16"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Progress Indicator -->
+                <div class="progress-indicator">
+                    <span id="current-slide">1</span> / <span id="total-slides">0</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Configuration Panel -->
+        <aside id="config-panel" class="config-panel">
+            <div class="config-panel-header">
+                <h2>Configuration</h2>
+                <button id="config-close-btn" class="btn btn-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="config-panel-content">
+                <!-- Operating Mode Section -->
+                <section class="config-section">
+                    <h3>Operating Mode</h3>
+                    <div class="mode-buttons">
+                        <button class="mode-btn active" data-mode="manual">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                            </svg>
+                            Manual
+                        </button>
+                        <button class="mode-btn" data-mode="auto">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            Auto
+                        </button>
+                        <button class="mode-btn" data-mode="random">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 3 21 3 21 8"/>
+                                <line x1="4" y1="20" x2="21" y2="3"/>
+                                <polyline points="21 16 21 21 16 21"/>
+                                <line x1="15" y1="15" x2="21" y2="21"/>
+                                <line x1="4" y1="4" x2="9" y2="9"/>
+                            </svg>
+                            Random
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Theme Selection Section -->
+                <section class="config-section">
+                    <h3>Theme</h3>
+                    <div class="theme-buttons">
+                        <button class="theme-btn active" data-theme="A">Theme A</button>
+                        <button class="theme-btn" data-theme="B">Theme B</button>
+                        <button class="theme-btn" data-theme="C">Theme C</button>
+                        <button class="theme-btn" data-theme="D">Theme D</button>
+                    </div>
+                </section>
+
+                <!-- Playback Settings Section -->
+                <section class="config-section">
+                    <h3>Playback Settings</h3>
+                    <div class="setting-row">
+                        <label for="slide-duration">Slide Duration: <span id="duration-value">3</span>s</label>
+                        <input type="range" id="slide-duration" min="1" max="30" value="3">
+                    </div>
+                    <div class="setting-row">
+                        <label for="transition-speed">Transition Speed: <span id="speed-value">0.5</span>s</label>
+                        <input type="range" id="transition-speed" min="0.1" max="2" step="0.1" value="0.5">
+                    </div>
+                </section>
+
+                <!-- Display Settings Section -->
+                <section class="config-section">
+                    <h3>Display Settings</h3>
+                    <div class="setting-row toggle-row">
+                        <label for="dark-mode-toggle">Dark Mode</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="dark-mode-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Photo Management Section -->
+                <section class="config-section">
+                    <h3>Photos</h3>
+                    <div class="photo-actions">
+                        <button id="add-photos-btn" class="btn btn-secondary btn-sm">Add Photos</button>
+                        <button id="shuffle-photos-btn" class="btn btn-secondary btn-sm">Shuffle</button>
+                        <button id="clear-photos-btn" class="btn btn-danger btn-sm">Clear All</button>
+                    </div>
+                    <p class="photo-hint">Drag photos to reorder. Click caption to edit.</p>
+                    <div id="photo-list" class="photo-list">
+                        <!-- Photos will be added here dynamically -->
+                    </div>
+                </section>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Command Bar Overlay -->
+    <div id="command-bar-overlay" class="command-bar-overlay hidden">
+        <div class="command-bar">
+            <div class="command-bar-input-wrapper">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" id="command-input" placeholder="Type a command..." autocomplete="off">
+                <kbd>ESC</kbd>
+            </div>
+            <ul id="command-list" class="command-list">
+                <!-- Commands will be populated dynamically -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- Hidden file input for adding more photos -->
+    <input type="file" id="add-file-input" multiple accept="image/*" hidden>
+
+    <!-- JavaScript Files -->
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/photos.js"></script>
+    <script src="js/slideshow.js"></script>
+    <script src="js/themes.js"></script>
+    <script src="js/command-bar.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

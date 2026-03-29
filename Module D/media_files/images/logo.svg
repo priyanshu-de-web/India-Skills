@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 60" fill="none">
+  <!-- Mountain silhouette -->
+  <path d="M10 45 L25 25 L35 35 L50 15 L65 30 L80 25 L90 45 Z" fill="#10b981" opacity="0.2"/>
+  <path d="M10 45 L25 25 L35 35 L50 15 L65 30 L80 25 L90 45" stroke="#10b981" stroke-width="2" fill="none"/>
+
+  <!-- Island wave -->
+  <path d="M5 50 Q20 48 35 50 T65 50 T95 50" stroke="#06b6d4" stroke-width="1.5" fill="none" opacity="0.6"/>
+
+  <!-- Text: Taiwan Explorer -->
+  <text x="105" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#0f172a">
+    Taiwan Explorer
+  </text>
+
+  <!-- Decorative dot -->
+  <circle cx="95" cy="20" r="3" fill="#10b981"/>
+</svg>

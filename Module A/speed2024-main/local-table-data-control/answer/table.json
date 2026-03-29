@@ -1,0 +1,32 @@
+{
+  "fields": [
+    "first name",
+    "last name",
+    "age",
+    "country",
+    "gender"
+  ],
+  "rows": [
+    [
+      "Park",
+      "Seokgil",
+      "19",
+      "Korea",
+      "male"
+    ],
+    [
+      "Jude",
+      "Harris",
+      "27",
+      "United States",
+      "male"
+    ],
+    [
+      "Maci",
+      "Farrell",
+      "23",
+      "France",
+      "female"
+    ]
+  ]
+}

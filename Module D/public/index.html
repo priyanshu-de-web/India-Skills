@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taiwan Explorer</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- SVG Icon Definitions -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 15.5V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v11.5"/><path d="M4 15.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"/><path d="m8 19-2 3"/><path d="m18 22-2-3"/><path d="M4 11h16"/><circle cx="9" cy="15" r="1"/><circle cx="15" cy="15" r="1"/>
+    </symbol>
+    <symbol id="i-landmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/>
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+    </symbol>
+    <symbol id="i-hotel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"/><path d="m9 16 .348-.24c1.465-1.013 3.84-1.013 5.304 0L15 16"/><path d="M8 7h.01"/><path d="M16 7h.01"/><path d="M12 7h.01"/><path d="M12 11h.01"/><path d="M16 11h.01"/><path d="M8 11h.01"/>
+    </symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+    </symbol>
+    <symbol id="i-utensils" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
+    </symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    </symbol>
+  </svg>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <nav class="nav">
+      <a href="#" class="nav__logo" aria-label="Taiwan Explorer Home">
+        <img src="/media/images/logo.svg" alt="Taiwan Explorer" width="150" height="30">
+      </a>
+      <ul class="nav__menu" id="navMenu" role="menubar">
+        <li role="none"><a href="#regional-guide" role="menuitem" class="nav__link"><svg class="nav__icon" aria-hidden="true"><use href="/media/icons/icon-pin.svg#root"/></svg>Regional Guide</a></li>
+        <li role="none"><a href="#experiences" role="menuitem" class="nav__link"><svg class="nav__icon" aria-hidden="true"><use href="/media/icons/icon-landmark.svg#root"/></svg>Experiences</a></li>
+        <li role="none"><a href="#practical-info" role="menuitem" class="nav__link"><svg class="nav__icon" aria-hidden="true"><use href="/media/icons/icon-globe.svg#root"/></svg>Practical Information</a></li>
+        <li role="none"><a href="#essential-info" role="menuitem" class="nav__link"><svg class="nav__icon" aria-hidden="true"><use href="/media/icons/icon-landmark.svg#root"/></svg>Essential Information</a></li>
+        <li role="none"><a href="#contact" role="menuitem" class="nav__link"><svg class="nav__icon" aria-hidden="true"><use href="/media/icons/icon-globe.svg#root"/></svg>Contact</a></li>
+      </ul>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+    </nav>
+    <!-- Mobile overlay menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu__header">
+        <span class="mobile-menu__title">Menu</span>
+        <button class="mobile-menu__close" id="mobileClose" aria-label="Close menu">&times;</button>
+      </div>
+      <ul class="mobile-menu__list">
+        <li><a href="#regional-guide" class="mobile-menu__link"><img src="/media/icons/icon-pin.svg" alt="" class="mobile-menu__icon" aria-hidden="true">Regional Guide</a></li>
+        <li><a href="#experiences" class="mobile-menu__link"><img src="/media/icons/icon-landmark.svg" alt="" class="mobile-menu__icon" aria-hidden="true">Experiences</a></li>
+        <li><a href="#practical-info" class="mobile-menu__link"><img src="/media/icons/icon-globe.svg" alt="" class="mobile-menu__icon" aria-hidden="true">Practical Information</a></li>
+        <li><a href="#essential-info" class="mobile-menu__link"><img src="/media/icons/icon-landmark.svg" alt="" class="mobile-menu__icon" aria-hidden="true">Essential Information</a></li>
+        <li><a href="#contact" class="mobile-menu__link"><img src="/media/icons/icon-globe.svg" alt="" class="mobile-menu__icon" aria-hidden="true">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero">
+      <picture>
+        <source media="(max-width: 759px)" srcset="/media/images/taiwan-cover-low-res.jpg">
+        <img src="/media/images/taiwan-cover.jpg" alt="Scenic Taiwan landscape with cityscape and mountains" class="hero__bg">
+      </picture>
+      <div class="hero__content">
+        <h1 class="hero__title">Taiwan: Small Island, Big Adventures</h1>
+        <p class="hero__subtitle">From marble gorges to neon nights—discover four regions, countless experiences.</p>
+        <a href="#regional-guide" class="hero__cta btn btn--primary">Explore Regions</a>
+      </div>
+    </section>
+
+    <!-- ===== REGIONAL GUIDE ===== -->
+    <section class="section regional-guide" id="regional-guide" aria-labelledby="rg-heading">
+      <div class="container">
+        <h2 class="section__title" id="rg-heading">Regional Guide</h2>
+        <p class="section__subtitle">Click a region on the map to explore.</p>
+        <div class="regional-guide__layout">
+          <div class="regional-guide__map" role="img" aria-label="Interactive map of Taiwan with four clickable regions">
+            <!-- Map loaded via JS with interactive regions -->
+          </div>
+          <div class="regional-guide__cards" id="regionCards" aria-live="polite">
+            <!-- Cards populated from DB via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CULTURAL & CULINARY EXPERIENCES ===== -->
+    <section class="section experiences" id="experiences" aria-labelledby="exp-heading">
+      <div class="container">
+        <h2 class="section__title" id="exp-heading">Cultural &amp; Culinary Experiences</h2>
+        <div class="experiences__tabs" role="tablist" aria-label="Experience categories">
+          <button class="tab-btn tab-btn--active" role="tab" aria-selected="true" aria-controls="cultural-panel" id="cultural-tab" data-tab="cultural">Cultural</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="culinary-panel" id="culinary-tab" data-tab="culinary">Culinary</button>
+        </div>
+
+        <!-- Cultural Panel -->
+        <div class="experiences__panel" id="cultural-panel" role="tabpanel" aria-labelledby="cultural-tab">
+          <div class="experiences__slider" aria-label="Cultural experiences gallery">
+            <div class="slider__track" id="culturalSlider">
+              <div class="slider__slide">
+                <picture>
+                  <source media="(max-width: 759px)" srcset="/media/images/cultural-1-low-res.jpg">
+                  <img src="/media/images/cultural-1.jpg" alt="Temple etiquette walk with incense rituals" class="slider__img" loading="lazy">
+                </picture>
+              </div>
+              <div class="slider__slide">
+                <picture>
+                  <source media="(max-width: 759px)" srcset="/media/images/cultural-2-low-res.jpg">
+                  <img src="/media/images/cultural-2.jpg" alt="Aboriginal crafts with indigenous artisans" class="slider__img" loading="lazy">
+                </picture>
+              </div>
+              <div class="slider__slide">
+                <picture>
+                  <source media="(max-width: 759px)" srcset="/media/images/cultural-3-low-res.jpg">
+                  <img src="/media/images/cultural-3.jpg" alt="Tea ceremony in Alishan mountains" class="slider__img" loading="lazy">
+                </picture>
+              </div>
+            </div>
+            <button class="slider__btn slider__btn--prev" aria-label="Previous slide">&lsaquo;</button>
+            <button class="slider__btn slider__btn--next" aria-label="Next slide">&rsaquo;</button>
+          </div>
+          <div class="experiences__cards">
+            <article class="exp-card fade-in">
+              <h3 class="exp-card__title">Temple Etiquette Walk</h3>
+              <p class="exp-card__desc">Learn incense rituals, fortune sticks, and local customs.</p>
+              <a href="#contact" class="exp-card__link">Ask about this experience</a>
+            </article>
+            <article class="exp-card fade-in">
+              <h3 class="exp-card__title">Aboriginal Crafts</h3>
+              <p class="exp-card__desc">Textiles &amp; woodcrafts with indigenous artisans.</p>
+              <a href="#contact" class="exp-card__link">Ask about this experience</a>
+            </article>
+            <article class="exp-card fade-in">
+              <h3 class="exp-card__title">Tea Ceremony in Alishan</h3>
+              <p class="exp-card__desc">Savor high-mountain oolongs and brewing technique.</p>
+              <a href="#contact" class="exp-card__link">Ask about this experience</a>
+            </article>
+          </div>
+        </div>
+
+        <!-- Culinary Panel -->
+        <div class="experiences__panel experiences__panel--hidden" id="culinary-panel" role="tabpanel" aria-labelledby="culinary-tab" hidden>
+          <div class="experiences__slider" aria-label="Culinary experiences gallery">
+            <div class="slider__track" id="culinarySlider">
+              <div class="slider__slide">
+                <picture>
+                  <source media="(max-width: 759px)" srcset="/media/images/culinary-1-low-res.jpg">
+                  <img src="/media/images/culinary-1.jpg" alt="Night market food tasting with stinky tofu and bubble tea" class="slider__img" loading="lazy">
+                </picture>
+              </div>
+              <div class="slider__slide">
+                <picture>
+                  <source media="(max-width: 759px)" srcset="/media/images/culinary-2-low-res.jpg">
+                  <img src="/media/images/culinary-2.jpg" alt="Sea-to-table dining in Hualien coastal restaurant" class="slider__img" loading="lazy">
+                </picture>
+              </div>
+              <div class="slider__slide">
+                <picture>
+                  <source media="(max-width: 759px)" srcset="/media/images/culinary-3-low-res.jpg">
+                  <img src="/media/images/culinary-3.jpg" alt="Pineapple cake baking workshop" class="slider__img" loading="lazy">
+                </picture>
+              </div>
+            </div>
+            <button class="slider__btn slider__btn--prev" aria-label="Previous slide">&lsaquo;</button>
+            <button class="slider__btn slider__btn--next" aria-label="Next slide">&rsaquo;</button>
+          </div>
+          <div class="experiences__cards">
+            <article class="exp-card fade-in">
+              <h3 class="exp-card__title">Night Market Tasting</h3>
+              <p class="exp-card__desc">Stinky tofu, bubble tea, oyster omelets &amp; more.</p>
+              <a href="#contact" class="exp-card__link">Ask about this experience</a>
+            </article>
+            <article class="exp-card fade-in">
+              <h3 class="exp-card__title">Sea-to-Table in Hualien</h3>
+              <p class="exp-card__desc">Fresh catch, coastal views, local recipes.</p>
+              <a href="#contact" class="exp-card__link">Ask about this experience</a>
+            </article>
+            <article class="exp-card fade-in">
+              <h3 class="exp-card__title">Pineapple Cake Workshop</h3>
+              <p class="exp-card__desc">Bake iconic treats to bring home.</p>
+              <a href="#contact" class="exp-card__link">Ask about this experience</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRACTICAL INFORMATION ===== -->
+    <section class="section practical-info" id="practical-info" aria-labelledby="pi-heading">
+      <div class="container">
+        <h2 class="section__title" id="pi-heading">Practical Information</h2>
+        <p class="section__subtitle">Pack the essentials—travel made simple.</p>
+        <div class="practical-info__tabs" role="tablist" aria-label="Practical information categories">
+          <button class="tab-btn tab-btn--active" role="tab" aria-selected="true" aria-controls="transportation-panel" id="transportation-tab" data-category="transportation">Transportation</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="accommodation-panel" id="accommodation-tab" data-category="accommodation">Accommodation</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="shopping-panel" id="shopping-tab" data-category="shopping">Shopping</button>
+        </div>
+        <div class="practical-info__content" id="practicalContent" aria-live="polite">
+          <!-- Populated from DB via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ESSENTIAL INFORMATION ===== -->
+    <section class="section essential-info" id="essential-info" aria-labelledby="ei-heading">
+      <div class="container">
+        <h2 class="section__title" id="ei-heading">Essential Information</h2>
+        <p class="section__subtitle">Official support and key contacts for your trip to Taiwan.</p>
+        <div class="essential-info__grid">
+          <!-- Tourism Bureau Card -->
+          <article class="info-card fade-in">
+            <h3 class="info-card__title"><img src="/media/icons/icon-landmark.svg" alt="" class="info-card__icon" aria-hidden="true"> Taiwan Tourism Bureau</h3>
+            <p class="info-card__text"><img src="/media/icons/icon-pin.svg" alt="" class="info-card__icon-sm" aria-hidden="true"> +886-2-0000-0000</p>
+            <p class="info-card__text"><img src="/media/icons/icon-globe.svg" alt="" class="info-card__icon-sm" aria-hidden="true"> info@example.com</p>
+            <p class="info-card__text"><img src="/media/icons/icon-globe.svg" alt="" class="info-card__icon-sm" aria-hidden="true"> example.com</p>
+            <div class="info-card__tts">
+              <button class="btn btn--sm btn--primary" id="ttsRead" aria-label="Read aloud tourism bureau information">Read aloud</button>
+              <button class="btn btn--sm btn--outline" id="ttsStop" aria-label="Stop reading" hidden>Stop</button>
+              <p class="tts-warning" id="ttsWarning" hidden>Text-to-Speech is not supported in this browser.</p>
+            </div>
+          </article>
+
+          <!-- QR Card -->
+          <article class="info-card fade-in">
+            <h3 class="info-card__title">Official Website QR</h3>
+            <p class="info-card__text">Scan to visit the official tourism website.</p>
+            <div class="info-card__qr" aria-label="QR code for official tourism website"></div>
+            <a href="https://example.com" class="btn btn--sm btn--primary" target="_blank" rel="noopener noreferrer">Open site</a>
+          </article>
+
+          <!-- Emergency Contacts -->
+          <article class="info-card fade-in">
+            <h3 class="info-card__title">Emergency &amp; Safety Contacts</h3>
+            <ul class="info-card__list">
+              <li>Police: <strong>000</strong></li>
+              <li>Fire/Ambulance: <strong>000</strong></li>
+              <li>Tourist Hotline: <strong>0800-000-000</strong></li>
+            </ul>
+          </article>
+
+          <!-- Downloadable Guide -->
+          <article class="info-card fade-in">
+            <h3 class="info-card__title">Downloadable Travel Guide</h3>
+            <p class="info-card__text">Comprehensive PDF guide with maps, itineraries, and essential tips for your Taiwan adventure.</p>
+            <a href="/media/pdf/taiwan-travel-guide.pdf" class="btn btn--primary" download aria-label="Download Taiwan travel guide PDF">Download Travel Guide (PDF)</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT FORM ===== -->
+    <section class="section contact" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <h2 class="section__title" id="contact-heading">Travel Consultation</h2>
+        <p class="section__subtitle">Get personalized recommendations for your Taiwan adventure.</p>
+        <form class="contact__form" id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="Your full name" required aria-required="true">
+            <span class="form-error" id="nameError" aria-live="polite">Please enter your name</span>
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required aria-required="true">
+            <span class="form-error" id="emailError" aria-live="polite">Enter a valid email</span>
+          </div>
+          <div class="form-group">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" id="country" name="country" class="form-input" placeholder="Where are you based?">
+          </div>
+          <div class="form-group">
+            <label for="interests" class="form-label">Interests</label>
+            <input type="text" id="interests" name="interests" class="form-input" placeholder="Culture, food, nature, beaches...">
+          </div>
+          <div class="form-group">
+            <label for="message" class="form-label">Message</label>
+            <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tell us about your dream Taiwan trip!" required aria-required="true" rows="4"></textarea>
+            <span class="form-error" id="messageError" aria-live="polite">Tell us a bit about your plans</span>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Submit</button>
+          <div class="contact__success" id="contactSuccess" hidden>
+            <p>Thanks! We've received your request. We'll reach out with tips for your trip.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="container footer__inner">
+      <div class="footer__left">
+        <img src="/media/images/logo.svg" alt="Taiwan Explorer" class="footer__logo" width="150" height="30">
+      </div>
+      <div class="footer__center">
+        <p>&copy; <span id="footerYear"></span> Taiwan Explorer</p>
+        <nav class="footer__links" aria-label="Footer links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms and Conditions</a>
+        </nav>
+      </div>
+      <div class="footer__right">
+        <a href="#" class="footer__social" aria-label="Facebook"><img src="/media/icons/icon-facebook.svg" alt="" aria-hidden="true" width="24" height="24"></a>
+        <a href="#" class="footer__social" aria-label="Instagram"><img src="/media/icons/icon-instagram.svg" alt="" aria-hidden="true" width="24" height="24"></a>
+        <a href="#" class="footer__social" aria-label="YouTube"><img src="/media/icons/icon-youtube.svg" alt="" aria-hidden="true" width="24" height="24"></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

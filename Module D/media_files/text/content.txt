@@ -1,0 +1,152 @@
+=== 0. Header ===
+
+Taiwan Explorer
+
+--- Navigation Links ---
+Regional Guide
+Experiences
+Practical Information
+Essential Information
+Contact
+
+--- Mobile Menu ---
+Menu
+
+=== 1. Hero Section ===
+
+Taiwan: Small Island, Big Adventures
+From marble gorges to neon nights—discover four regions, countless experiences.
+Explore Regions
+
+=== 2. Regional Guide ===
+
+Regional Guide
+Click a region on the map to explore.
+
+=== 3. Cultural & Culinary Experiences ===
+
+Cultural & Culinary Experiences
+
+--- Tab Labels ---
+Cultural
+Culinary
+
+--- Cultural Experiences ---
+
+Temple Etiquette Walk
+Learn incense rituals, fortune sticks, and local customs.
+
+Aboriginal Crafts
+Textiles & woodcrafts with indigenous artisans.
+
+Tea Ceremony in Alishan
+Savor high-mountain oolongs and brewing technique.
+
+--- Culinary Experiences ---
+
+Night Market Tasting
+Stinky tofu, bubble tea, oyster omelets & more.
+
+Sea-to-Table in Hualien
+Fresh catch, coastal views, local recipes.
+
+Pineapple Cake Workshop
+Bake iconic treats to bring home.
+
+--- Call to Action ---
+Ask about this experience
+
+=== 4. Practical Information ===
+
+Practical Information
+Pack the essentials—travel made simple.
+
+--- Tab Labels ---
+transportation
+accommodation
+shopping
+
+=== 5. Essential Information ===
+
+Essential Information
+Official support and key contacts for your trip to Taiwan.
+
+--- Taiwan Tourism Bureau Card ---
+
+Taiwan Tourism Bureau
++886-2-0000-0000
+info@example.com
+example.com
+
+Read aloud
+Stop
+Text-to-Speech is not supported in this browser.
+
+--- TTS Content (Spoken Version) ---
+
+Taiwan Tourism Bureau: Phone plus eight eight six dash two dash zero zero zero zero dash zero zero zero zero. Email info at example dot com. Official site at example dot com. For urgent help, dial zero zero zero for police or zero zero zero for emergencies.
+
+--- Official Website QR Card ---
+
+Official Website QR
+Scan to visit the official tourism website.
+Open site
+
+--- Emergency & Safety Contacts Card ---
+
+Emergency & Safety Contacts
+Police: 000
+Fire/Ambulance: 000
+Tourist Hotline: 0800-000-000
+
+--- Downloadable Guide Card ---
+
+Downloadable Travel Guide
+Comprehensive PDF guide with maps, itineraries, and essential tips for your Taiwan adventure.
+Download Travel Guide (PDF)
+
+=== 6. Contact Form ===
+
+Travel Consultation
+Get personalized recommendations for your Taiwan adventure.
+
+--- Form Labels ---
+Name
+Email
+Country
+Interests
+Message
+
+--- Placeholders ---
+Your full name
+you@example.com
+Where are you based?
+Culture, food, nature, beaches…
+Tell us about your dream Taiwan trip!
+
+--- Error Messages ---
+Please enter your name
+Enter a valid email
+Tell us a bit about your plans
+
+--- Form Footer ---
+Submit
+
+--- Success Message ---
+Thanks! We've received your request. We'll reach out with tips for [region] region.
+
+=== 7. Footer ===
+
+Taiwan Explorer
+
+--- Social Media (aria-labels) ---
+Facebook
+Instagram
+YouTube
+
+--- Copyright ---
+© [year] Taiwan Explorer
+
+--- Footer Links ---
+Privacy Policy
+Terms and Conditions

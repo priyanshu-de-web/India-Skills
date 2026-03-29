@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="chart.umd.js"></script>
+    <script>
+        window.onload = () => {
+            let visitorData = [];
+            let chart = null;
+            const disableLabels = [];
+            const $legendWrapper = document.querySelector("#legendWrapper");
+
+            fetch("./data.json").then(res => res.json().then(data => {
+                visitorData = data;
+
+                $legendWrapper.innerHTML= visitorData.map(item => `
+                    <button data-label="${item.name}">${item.name}</button>
+                `).join("");
+
+                $legendWrapper.querySelectorAll("button").forEach(e => e.addEventListener("click", function(){
+                    const label = this.dataset.label;
+                    const index = disableLabels.indexOf(label);
+                    if(index !== -1) {
+                        disableLabels.splice(index, 1);
+                        this.classList.remove("remove");
+                    } else {
+                        disableLabels.push(label);
+                        this.classList.add("remove");
+                    }
+
+                    draw();
+                }))
+
+                draw();
+            }))
+
+            const draw = () => {
+                const $canvas = document.querySelector("canvas");
+
+                const data = visitorData.filter(item => !disableLabels.includes(item.name));
+
+                const labels = data.map(item => item.name);
+                const visitors = data.map(item => item.visitor);
+
+                if(chart) {
+                    chart.destroy();
+                }
+
+                chart = new Chart($canvas, {
+                    type: "radar",
+                    data: {
+                        labels,
+                        datasets: [
+                            {
+                                label: "Visitor",
+                                data: visitors,
+                            }
+                        ]
+                    },
+                    plugins: [{
+                        id: "clickEvent",
+                        afterEvent(chart, args) {
+                            if(args.event.type !== "click") return;
+
+                            const label = chart.tooltip.title?.[0];
+                            if(!label || disableLabels.includes(label)) return;
+
+                            disableLabels.push(label);
+                            $legendWrapper.querySelector(`button[data-label="${label}"]`).classList.add("remove");
+
+                            draw();
+                        }
+                    }]
+                })
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #legendWrapper {
+            display: flex;
+            flex-wrap: wrap;
+            padding: .5rem;
+            background: #ddd;
+            width: 400px;
+        }
+
+        #legendWrapper button {
+            margin: .4rem;
+        }
+
+        #legendWrapper button.remove {
+            text-decoration: line-through;
+        }
+
+        #canvasBox {
+            width: 700px;
+            height: 700px;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+<div id="legendWrapper"></div>
+<div id="canvasBox">
+    <canvas ></canvas>
+</div>
+</body>
+</html>

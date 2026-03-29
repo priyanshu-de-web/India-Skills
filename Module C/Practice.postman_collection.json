@@ -1,0 +1,519 @@
+{
+  "info": {
+    "_postman_id": "a7c4917a-e660-4bdc-9a47-63a906dd4db9",
+    "name": "Practice",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39454075"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"user4\",\r\n  \"email\": \"user4@web.wsa\",\r\n  \"password\": \"user4pass\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/logout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Auth Verification",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "3f02ebe3d7929b091e3d8ccfde2f3bc6",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/user",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Role",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "21232f297a57a5a743894a0e4a801fc3",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"role\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/user/69c149cc70fa4ac30b0d768e",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "69c149cc70fa4ac30b0d768e"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ban User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "21232f297a57a5a743894a0e4a801fc3",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"role\": \"admin\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/user/69c1438710e81224151bc8ba/ban",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "69c1438710e81224151bc8ba",
+                "ban"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unban User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "21232f297a57a5a743894a0e4a801fc3",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"role\": \"admin\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/user/69c1438710e81224151bc8ba/unban",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "user",
+                "69c1438710e81224151bc8ba",
+                "unban"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Album",
+      "item": [
+        {
+          "name": "Create Album",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"My Album\",\r\n  \"artist\": \"Me\",\r\n  \"release_year\": 2025,\r\n  \"genre\": \"Rock\",\r\n  \"description\": \"Test album\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/albums",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "albums"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all albums",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "/api/albums",
+              "path": [
+                "api",
+                "albums"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Album Description",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Songs",
+      "item": [
+        {
+          "name": "Add Song to Album",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "3f02ebe3d7929b091e3d8ccfde2f3bc6",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Song 1\",\r\n  \"duration_seconds\": 200,\r\n  \"label\": \"Rock,Pop\",\r\n  \"lyrics\": \"Test\",\r\n  \"is_cover\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/albums/:album_id/songs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "albums",
+                ":album_id",
+                "songs"
+              ],
+              "variable": [
+                {
+                  "key": "album_id",
+                  "value": "69c57b6eee5fd1dd5b4966c2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all Songs in Album",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Get Album Cover",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Update Song",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "3f02ebe3d7929b091e3d8ccfde2f3bc6",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Updated Song\",\r\n  \"duration_seconds\": 220,\r\n  \"label\": \"Rock,Pop\",\r\n  \"lyrics\": \"Updated lyrics\",\r\n  \"is_cover\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/albums/:album_id/songs/:songid",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "albums",
+                ":album_id",
+                "songs",
+                ":songid"
+              ],
+              "variable": [
+                {
+                  "key": "album_id",
+                  "value": "69c57b6eee5fd1dd5b4966c2"
+                },
+                {
+                  "key": "songid",
+                  "value": "69c588b1951a578f03c87991"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Song",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "3f02ebe3d7929b091e3d8ccfde2f3bc6",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/albums/:album_id/songs/:songid",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "albums",
+                ":album_id",
+                "songs",
+                ":songid"
+              ],
+              "variable": [
+                {
+                  "key": "album_id",
+                  "value": "69c57b6eee5fd1dd5b4966c2"
+                },
+                {
+                  "key": "songid",
+                  "value": "69c588b1951a578f03c87991"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Song Order",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "3f02ebe3d7929b091e3d8ccfde2f3bc6",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"song_ids\": [\"69c5e7af82d680b51072a22d\", \"69c5e7fab8d2a321056835b6\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/albums/:album_id/songs/order",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "albums",
+                ":album_id",
+                "songs",
+                "order"
+              ],
+              "variable": [
+                {
+                  "key": "album_id",
+                  "value": "69c57b6eee5fd1dd5b4966c2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Song Details",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Statistics",
+      "item": [
+        {
+          "name": "Get Song Stats",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

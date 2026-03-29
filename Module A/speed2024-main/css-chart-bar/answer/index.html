@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Chart - bar</title>
+    <style>
+        :root {
+            --color-1: #ff5d5d;
+            --color-2: #83ff59;
+            --color-3: #7691ff;
+            --bar1: 100%;
+            --bar2: 36%;
+            --bar3: 72%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #container {
+            padding: 3rem;
+            border: 1px solid #555;
+        }
+
+        #chart {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        #chart .bar {
+            width: 3rem;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: 1s;
+        }
+
+        #chart .bar:nth-child(1) {
+            height: var(--bar1);
+            background-color: var(--color-1);
+        }
+
+        #chart .bar:nth-child(2) {
+            height: var(--bar2);
+            background-color: var(--color-2);
+            transition-delay: .3s;
+        }
+
+        #chart .bar:nth-child(3) {
+            height: var(--bar3);
+            background-color: var(--color-3);
+            transition-delay: .6s;
+        }
+
+        #container:hover .bar {
+            transform: scaleY(1);
+        }
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="chart">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+</div>
+</body>
+</html>

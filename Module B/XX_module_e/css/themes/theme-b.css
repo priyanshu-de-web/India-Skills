@@ -1,0 +1,84 @@
+/* Theme B - Left to Right Animation */
+
+[data-slide-theme="B"] .slide {
+    position: relative;
+}
+
+[data-slide-theme="B"] .slide img {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+[data-slide-theme="B"] .slide-caption {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Entering animation - slide from left to center */
+[data-slide-theme="B"] .slide.slide-enter {
+    opacity: 1;
+}
+
+[data-slide-theme="B"] .slide.slide-enter img {
+    transform: translateX(-100vw);
+    opacity: 0;
+}
+
+[data-slide-theme="B"] .slide.slide-enter .slide-caption {
+    transform: translateX(-100vw);
+    opacity: 0;
+}
+
+[data-slide-theme="B"] .slide.slide-enter-active img {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform var(--slide-transition-speed) ease-out, 
+                opacity var(--slide-transition-speed) ease-out;
+}
+
+[data-slide-theme="B"] .slide.slide-enter-active .slide-caption {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform var(--slide-transition-speed) ease-out 0.3s, 
+                opacity var(--slide-transition-speed) ease-out 0.3s;
+}
+
+/* Exiting animation - slide from center to right */
+[data-slide-theme="B"] .slide.slide-exit {
+    opacity: 1;
+}
+
+[data-slide-theme="B"] .slide.slide-exit img {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+[data-slide-theme="B"] .slide.slide-exit .slide-caption {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+[data-slide-theme="B"] .slide.slide-exit-active img {
+    transform: translateX(100vw);
+    opacity: 0;
+    transition: transform var(--slide-transition-speed) ease-in, 
+                opacity var(--slide-transition-speed) ease-in;
+}
+
+[data-slide-theme="B"] .slide.slide-exit-active .slide-caption {
+    transform: translateX(100vw);
+    opacity: 0;
+    transition: transform var(--slide-transition-speed) ease-in 0.3s, 
+                opacity var(--slide-transition-speed) ease-in 0.3s;
+}
+
+/* Idle state */
+[data-slide-theme="B"] .slide.slide-active img {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+[data-slide-theme="B"] .slide.slide-active .slide-caption {
+    transform: translateX(0);
+    opacity: 1;
+}

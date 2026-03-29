@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Paris",
+    "visitor": 52500000
+  },
+  {
+    "name": "Nice",
+    "visitor": 6300000
+  },
+  {
+    "name": "Lyon",
+    "visitor": 6300000
+  },
+  {
+    "name": "Marseille",
+    "visitor": 5250000
+  },
+  {
+    "name": "Bordeaux",
+    "visitor": 3150000
+  },
+  {
+    "name": "Strasbourg",
+    "visitor": 2835000
+  },
+  {
+    "name": "Toulouse",
+    "visitor": 2625000
+  },
+  {
+    "name": "Lille",
+    "visitor": 2415000
+  }
+]

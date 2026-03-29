@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    letter-spacing: -0.025em;
+    line-height: 1.5;
+}
+
+body.freeze {
+    height: 100vh;
+    overflow: hidden;
+}
+
+#app {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 4rem;
+    width: 100%;
+    min-height: 100vh;
+}

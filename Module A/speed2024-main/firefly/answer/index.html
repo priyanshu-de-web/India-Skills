@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            perspective: 100vmin;
+            background: #333;
+            overflow: hidden;
+        }
+
+        .cube {
+            position: relative;
+            transform-style: preserve-3d;
+            user-select: none;
+            will-change: transform;
+        }
+
+        .point_box {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            --point_size: 1vmin;
+            transform-style: preserve-3d;
+        }
+
+        .point_box .face {
+            width: var(--point_size);
+            aspect-ratio: 1/1;
+            border: 1px solid rgba(0,0,0,.4);
+            background: rgba(255,255,255,.3);
+            position: absolute;
+            margin-left: calc(var(--point_size) / -2);
+            margin-top: calc(var(--point_size) / -2);
+            animation-name: firefly;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            will-change: box-shadow;
+        }
+
+        .point_box .face:nth-child(1) {
+            transform: rotateX(0) translateZ(calc(var(--point_size) / 2));
+        }
+        .point_box .face:nth-child(2) {
+            transform: rotateX(90deg) translateZ(calc(var(--point_size) / 2));
+        }
+        .point_box .face:nth-child(3) {
+            transform: rotateX(180deg) translateZ(calc(var(--point_size) / 2));
+        }
+        .point_box .face:nth-child(4) {
+            transform: rotateX(270deg) translateZ(calc(var(--point_size) / 2));
+        }
+        .point_box .face:nth-child(5) {
+            transform: rotateY(90deg) translateZ(calc(var(--point_size) / 2));
+        }
+        .point_box .face:nth-child(6) {
+            transform: rotateY(-90deg) translateZ(calc(var(--point_size) / 2));
+        }
+        
+        @keyframes firefly {
+            0% {
+                box-shadow: 0 0 1vmin 1vmin rgba(255, 93, 93, 0.02);
+            }
+            30% {
+                box-shadow: 0 0 2vmin 1vmin rgba(255, 93, 93, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 1vmin 1vmin rgba(255, 93, 93, 0.02);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="cube">
+
+</div>
+
+<script>
+    const $cube = document.querySelector(".cube");
+    let transformStyle = "";
+    const axiosPointCount = 5;
+    const pointGap = "7vmin";
+
+    function initCube() {
+        let html = "";
+        for(let x = 0; x < axiosPointCount; x++) {
+            for(let y = 0; y < axiosPointCount; y++) {
+                for(let z = 0; z < axiosPointCount; z++) {
+                    const transform = `
+                        translateX(calc(${pointGap} * ${x} - ${pointGap} * (${axiosPointCount - 1}) / 2))
+                        translateY(calc(${pointGap} * ${y} - ${pointGap} * (${axiosPointCount - 1}) / 2))
+                        translateZ(calc(${pointGap} * ${z} - ${pointGap} * (${axiosPointCount - 1}) / 2))
+                    `;
+                    const delayX = Math.abs((axiosPointCount - 1) / 2 - x);
+                    const delayY = Math.abs((axiosPointCount - 1) / 2 - y);
+                    const delayZ = Math.abs((axiosPointCount - 1) / 2 - z);
+                    const delay = Math.floor(axiosPointCount / 2) - Math.max(delayX, delayY, delayZ) * 0.2;
+
+                    html += `<div class="point_box" style="transform: ${transform};">
+                                <div class="face" style="animation-delay: ${-delay}s"></div>
+                                <div class="face" style="animation-delay: ${-delay}s"></div>
+                                <div class="face" style="animation-delay: ${-delay}s"></div>
+                                <div class="face" style="animation-delay: ${-delay}s"></div>
+                                <div class="face" style="animation-delay: ${-delay}s"></div>
+                                <div class="face" style="animation-delay: ${-delay}s"></div>
+                            </div>`;
+
+                }
+            }
+        }
+
+        $cube.innerHTML = html
+    }
+
+    /* rotate */
+    window.addEventListener("mousedown", mouseDown);
+
+    let downX = 0;
+    let downY = 0;
+    let tmpTransform = "";
+    function mouseDown(e) {
+        window.addEventListener("mousemove", mouseMove);
+        window.addEventListener("mouseup", mouseUp);
+
+        downX = e.pageX
+        downY = e.pageY
+        tmpTransform = "";
+    }
+
+    const moveRatio = .5;
+    function mouseMove(e) {
+        const diffX = downX - e.pageX;
+        const diffY = downY - e.pageY;
+
+        const xDeg = -diffX * moveRatio;
+        const yDeg = diffY * moveRatio;
+
+        tmpTransform = `rotateX(${yDeg}deg) rotateY(${xDeg}deg)`;
+
+        applyStyle();
+    }
+
+    function mouseUp(e) {
+        window.removeEventListener("mousemove", mouseMove);
+        window.removeEventListener("mouseup", mouseUp);
+
+        transformStyle = tmpTransform + transformStyle;
+        tmpTransform = "";
+
+        applyStyle();
+    }
+
+    /* scroll */
+    let scaleTransformValue = 0;
+    window.addEventListener("wheel", function(e) {
+        if(e.deltaY > 0) {
+            console.log("scale down");
+            scaleTransformValue--;
+        } else {
+            console.log("scale up");
+            scaleTransformValue++;
+        }
+        applyStyle();
+    })
+
+    function applyStyle() {
+        const scaleTransform = `translateZ(${scaleTransformValue}vw)`;
+        $cube.style.transform = scaleTransform + tmpTransform + transformStyle;
+    }
+
+    initCube();
+</script>
+</body>
+</html>

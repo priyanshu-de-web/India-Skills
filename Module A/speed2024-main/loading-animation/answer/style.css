@@ -1,0 +1,182 @@
+/* variable */
+:root {
+    --stick-width: 30px;
+    --stick-height: 210px;
+}
+
+/* init */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+/* container */
+#wrapper {
+    display: flex;
+    flex-direction: column;
+
+    width: calc(var(--stick-height) - var(--stick-width) * 2);
+    height: calc(var(--stick-height) - var(--stick-width) * 2);
+}
+
+/* stick box */
+.verBox {
+    display: flex;
+    justify-content: space-between;
+
+    height: 100%;
+}
+
+.horBox {
+    padding: 0 var(--stick-width);
+}
+
+/* stick */
+.stick {
+    min-width: var(--stick-width);
+    min-height: var(--stick-width);
+
+    position: relative;
+}
+
+.stick.vertical {
+    height: 100%;
+    width: var(--stick-width);
+}
+
+/* item */
+.stick .item {
+    position: absolute;
+
+    background-color: #333;
+    border: 5px solid #fff;
+}
+
+/* 각 item의 길이를 50% + 2px로 설정하여 중간 흰 선이 안보이게함 */
+
+/* horizon item */
+.stick.horizontal .item {
+    height: 100%;
+    width: calc(var(--stick-height) / 2 + 2px);
+}
+
+.stick.horizontal .item.a {
+    right: calc(50% - 1px);
+    border-right: none;
+}
+
+.stick.horizontal .item.b {
+    left: calc(50% - 1px);
+    border-left: none;
+}
+
+/* vertical item */
+.stick.vertical .item {
+    width: 100%;
+    height: calc(var(--stick-height) / 2 + 2px);
+}
+
+.stick.vertical .item.a {
+    bottom: calc(50% - 1px);
+    border-bottom: none;
+}
+
+.stick.vertical .item.b {
+    top: calc(50% - 1px);
+    border-top: none;
+}
+
+/* up & down */
+.stick .item.up {
+    z-index: 3;
+    animation: 2s 2s spinUp infinite;
+}
+
+.stick .item.down {
+    z-index: 2;
+    animation: 2s 2s spinDown infinite;
+}
+
+/* animation origin */
+.stick .item {
+    --long-origin: calc(var(--stick-height) - var(--stick-width) * 1.5);
+    --short-origin: calc(var(--stick-height) / 2 - var(--stick-width) * 1.5);
+}
+
+.stick.top .item.a {
+    transform-origin: var(--long-origin) center;
+}
+
+.stick.top .item.b {
+    transform-origin: var(--short-origin) center;
+}
+
+.stick.left .item.a {
+    transform-origin: center calc(var(--stick-height) / 2 - var(--short-origin));
+}
+
+.stick.left .item.b {
+    transform-origin: center calc(var(--stick-height) / 2 - var(--long-origin));
+}
+
+.stick.right .item.a {
+    transform-origin: center var(--long-origin);
+}
+
+.stick.right .item.b {
+    transform-origin: center var(--short-origin);
+}
+
+.stick.bottom .item.a {
+    transform-origin: calc(var(--stick-height) / 2 - var(--short-origin)) center;
+}
+
+.stick.bottom .item.b {
+    transform-origin: calc(var(--stick-height) / 2 - var(--long-origin)) center;
+}
+
+
+/* animation */
+@keyframes spinUp {
+    0% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(270deg);
+        z-index: 2;
+    }
+
+    100% {
+        transform: rotate(270deg);
+        z-index: 2;
+    }
+}
+
+@keyframes spinDown {
+    0% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(270deg);
+        z-index: 3;
+    }
+
+    100% {
+        transform: rotate(270deg);
+        z-index: 3;
+    }
+}

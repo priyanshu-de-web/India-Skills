@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+
+        .wrapper {
+            position: relative;
+        }
+
+        .item {
+            width: calc(100% / 4);
+            padding: 8px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .item img {
+            display: block;
+            width: 100%;
+        }
+
+        .checker {
+            height: 50px;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="wrapper"></div>
+    <div class="checker"></div>
+</div>
+
+<script>
+    const heightArray = [0, 0, 0, 0];
+    let startNumber = 1;
+    const displayCount = 9;
+    const maxNumber = 100;
+    const itemWidth = 1200 / heightArray.length;
+
+    let isLoading = false;
+    let observer = null;
+
+    const $checker = document.querySelector(".checker");
+    const $wrapper = document.querySelector(".wrapper");
+
+    function moreImages(entry) {
+        if(!entry[0].isIntersecting) return;
+        if(startNumber > maxNumber) return;
+        if(isLoading) return;
+        isLoading = true;
+
+        const images = [];
+        const endNumber = Math.min(startNumber + displayCount, maxNumber);
+        for (let i = startNumber; i <= endNumber; i++) {
+            images.push(loadImage(`./images/${i}.jpg`));
+        }
+
+        Promise.all(images).then(array => {
+            const fragment = document.createDocumentFragment();
+            const $items = [];
+            for (const element of array) {
+                const $item = document.createElement("div");
+                $item.classList.add("item");
+                $item.appendChild(element);
+                $items.push($item);
+
+                fragment.appendChild($item);
+            }
+            $wrapper.appendChild(fragment);
+
+            setTimeout(() => {
+                for (const $item of $items) {
+                    const minHeight = Math.min(...heightArray);
+                    const minColumnIndex = heightArray.indexOf(minHeight);
+                    $item.style.transform = `translate(${itemWidth * minColumnIndex}px, ${heightArray[minColumnIndex]}px)`
+                    heightArray[minColumnIndex] += $item.clientHeight;
+                }
+
+                const maxHeight = Math.max(...heightArray);
+                $wrapper.style.height = maxHeight + "px";
+                startNumber = endNumber + 1;
+                isLoading = false;
+                checkContents();
+            }, 0)
+        })
+    }
+
+    function loadImage(url) {
+        return new Promise((res, rej) => {
+            const $img = document.createElement("img");
+
+            $img.onload = () => {
+                res($img);
+            }
+
+            $img.src = url;
+        })
+    }
+
+    function checkContents() {
+        if(observer) {
+            observer.disconnect();
+        }
+        observer = new IntersectionObserver(moreImages);
+        observer.observe($checker);
+    }
+
+    checkContents();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Chart - pie</title>
+    <style>
+        :root {
+            --color-1: #ff5d5d;
+            --color-2: #83ff59;
+            --color-3: #7691ff;
+            --circle1: 45%;
+            --circle2: 25%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #container {
+            padding: 3rem;
+            border: 1px solid #555;
+        }
+
+        #chart {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: circle-init 1s forwards linear;
+        }
+
+        #chart:before, #chart:after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        #chart:before {
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                    var(--color-1) var(--circle1),
+                    var(--color-2) var(--circle1) calc(var(--circle1) + var(--circle2)),
+                    var(--color-3) calc(var(--circle1) + var(--circle2)));
+        }
+
+        #chart:after {
+            width: 40%;
+            height: 40%;
+            background-color: #fff;
+        }
+
+        #container:hover #chart {
+            animation: circle 1s forwards linear;
+        }
+
+        @keyframes circle-init {
+            0% {
+                clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 0, 50% 0, 50% 50%);
+            }
+            12.5% {
+                clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 0, 0 0, 50% 50%);
+            }
+            37.5% {
+                clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 100%, 0 100%, 50% 50%);
+            }
+            62.5% {
+                clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 50% 50%);
+            }
+            87.5% {
+                clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 0, 100% 0, 100% 0, 100% 0, 50% 50%);
+            }
+            100% {
+                clip-path: polygon(50% 50%, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0, 50% 50%);
+            }
+        }
+
+        @keyframes circle {
+            0% {
+                clip-path: polygon(50% 50%, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0, 50% 50%);
+            }
+            12.5% {
+                clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 0, 100% 0, 100% 0, 100% 0, 50% 50%);
+            }
+            37.5% {
+                clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 50% 50%);
+            }
+            62.5% {
+                clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 100%, 0 100%, 50% 50%);
+            }
+            87.5% {
+                clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 0, 0 0, 50% 50%);
+            }
+            100% {
+                clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 0, 50% 0, 50% 50%);
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="chart">
+    </div>
+</div>
+</body>
+</html>
